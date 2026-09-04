@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ApexBank | Dashboard</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/3d.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 80% 10%, rgba(0, 217, 255, .08), transparent 25%),
+                #050914;
+            color: #fff;
+        }
+
+        .dashboard-layout {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 250px;
+            min-height: 100vh;
+            padding: 28px 18px;
+            background: rgba(8, 14, 28, .94);
+            border-right: 1px solid rgba(255,255,255,.07);
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 20;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 800;
+            padding: 0 14px 35px;
+        }
+
+        .logo span {
+            color: #00d9ff;
+        }
+
+        .nav-title {
+            color: #66748c;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0 14px 12px;
+        }
+
+        .side-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .side-nav a {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 13px 14px;
+            border-radius: 12px;
+            color: #8c99ae;
+            text-decoration: none;
+            font-size: 14px;
+            transition: .25s;
+        }
+
+        .side-nav a:hover,
+        .side-nav a.active {
+            color: #fff;
+            background: rgba(0,217,255,.1);
+        }
+
+        .side-nav a.active {
+            border: 1px solid rgba(0,217,255,.12);
+        }
+
+        .nav-icon {
+            width: 24px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .sidebar-bottom {
+            position: absolute;
+            bottom: 25px;
+            left: 18px;
+            right: 18px;
+        }
+
+        .help-box {
+            padding: 17px;
+            border-radius: 15px;
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.07);
+            margin-bottom: 15px;
+        }
+
+        .help-box strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .help-box small {
+            color: #76839a;
+            line-height: 1.5;
+        }
+
+        .logout {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            color: #8794aa;
+            padding: 12px;
+            cursor: pointer;
+            text-align: left;
+            border-radius: 10px;
+        }
+
+        .logout:hover {
+            background: rgba(255,255,255,.05);
+            color: #fff;
+        }
+
+        /* MAIN */
+
+        .main-content {
+            width: calc(100% - 250px);
+            margin-left: 250px;
+            padding: 28px 35px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .welcome h1 {
+            margin: 0 0 7px;
+            font-size: 28px;
+        }
+
+        .welcome p {
+            margin: 0;
+            color: #78869c;
+            font-size: 14px;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(255,255,255,.07);
+            cursor: pointer;
+        }
+
+        .user-mini {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg,#00d9ff,#4169ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #03111b;
+            font-weight: 800;
+        }
+
+        .user-mini strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .user-mini small {
+            color: #718097;
+            font-size: 11px;
+        }
+
+        /* BALANCE */
+
+        .balance-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .balance-card {
+            min-height: 180px;
+            padding: 25px;
+            border-radius: 22px;
+            background: rgba(15,24,43,.75);
+            border: 1px solid rgba(255,255,255,.07);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card.primary {
+            background:
+                linear-gradient(135deg,rgba(0,217,255,.16),rgba(31,53,100,.35));
+        }
+
+        .balance-card.primary::after {
+            content: "";
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            right: -65px;
+            top: -60px;
+            border: 1px solid rgba(0,217,255,.15);
+        }
+
+        .balance-label {
+            color: #8c9ab0;
+            font-size: 12px;
+            margin-bottom: 13px;
+        }
+
+        .balance-amount {
+            font-size: 31px;
+            font-weight: 800;
+            letter-spacing: .5px;
+            margin-bottom: 17px;
+        }
+
+        .account-number {
+            color: #748199;
+            font-size: 11px;
+        }
+
+        .card-title {
+            color: #8c9ab0;
+            font-size: 12px;
+            margin-bottom: 18px;
+        }
+
+        .small-amount {
+            font-size: 24px;
+            font-weight: 750;
+        }
+
+        .positive {
+            color: #46ddb0;
+            font-size: 12px;
+            margin-top: 9px;
+        }
+
+        /* CONTENT GRID */
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 20px;
+        }
+
+        .panel {
+            padding: 24px;
+            border-radius: 20px;
+            background: rgba(12,20,36,.78);
+            border: 1px solid rgba(255,255,255,.07);
+            margin-bottom: 20px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .panel-header h2 {
+            font-size: 17px;
+            margin: 0;
+        }
+
+        .panel-header a {
+            color: #00d9ff;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        /* TRANSACTIONS */
+
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,.055);
+        }
+
+        .transaction:last-child {
+            border-bottom: 0;
+        }
+
+        .transaction-left {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,.05);
+        }
+
+        .transaction-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .transaction-date {
+            color: #68768d;
+            font-size: 10px;
+            margin-top: 5px;
+        }
+
+        .transaction-amount {
+            text-align: right;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .expense {
+            color: #ff7e91;
+        }
+
+        .income {
+            color: #46ddb0;
+        }
+
+        /* QUICK ACTIONS */
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .quick-action {
+            padding: 17px;
+            border-radius: 14px;
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.06);
+            color: #d7dfeb;
+            text-decoration: none;
+            transition: .25s;
+        }
+
+        .quick-action:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0,217,255,.25);
+            background: rgba(0,217,255,.06);
+        }
+
+        .quick-action-icon {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .quick-action strong {
+            display: block;
+            font-size: 12px;
+        }
+
+        .quick-action small {
+            color: #69778d;
+            display: block;
+            margin-top: 4px;
+            font-size: 10px;
+        }
+
+        /* SPENDING */
+
+        .chart {
+            height: 170px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            gap: 10px;
+            padding-top: 20px;
+        }
+
+        .bar {
+            width: 25px;
+            border-radius: 7px 7px 2px 2px;
+            background: linear-gradient(to top,#007da0,#00d9ff);
+            opacity: .8;
+            transition: .3s;
+        }
+
+        .bar:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        .bar:nth-child(1) { height: 45%; }
+        .bar:nth-child(2) { height: 65%; }
+        .bar:nth-child(3) { height: 52%; }
+        .bar:nth-child(4) { height: 78%; }
+        .bar:nth-child(5) { height: 58%; }
+        .bar:nth-child(6) { height: 88%; }
+        .bar:nth-child(7) { height: 70%; }
+
+        .chart-labels {
+            display: flex;
+            justify-content: space-around;
+            color: #68768d;
+            font-size: 10px;
+            margin-top: 10px;
+        }
+
+        /* ACCOUNT CARD */
+
+        .virtual-card {
+            height: 190px;
+            border-radius: 20px;
+            padding: 23px;
+            background:
+                linear-gradient(135deg,#172d4b,#071522);
+            border: 1px solid rgba(0,217,255,.14);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .virtual-card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,217,255,.12);
+            right: -60px;
+            bottom: -80px;
+        }
+
+        .virtual-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .virtual-card-top strong {
+            font-size: 16px;
+        }
+
+        .contactless {
+            font-size: 19px;
+        }
+
+        .card-chip {
+            width: 40px;
+            height: 30px;
+            margin-top: 25px;
+            border-radius: 7px;
+            background: linear-gradient(135deg,#d5d9dd,#858b91);
+        }
+
+        .card-number {
+            margin-top: 22px;
+            letter-spacing: 3px;
+            font-size: 14px;
+            color: #c6d1df;
+        }
+
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 13px;
+        }
+
+        .card-bottom small {
+            display: block;
+            color: #718097;
+            font-size: 8px;
+            margin-bottom: 3px;
+        }
+
+        .card-bottom strong {
+            font-size: 10px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 1050px) {
+            .balance-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .balance-card.primary {
+                grid-column: span 2;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                width: 70px;
+                padding: 20px 10px;
+            }
+
+            .logo {
+                font-size: 0;
+                text-align: center;
+                padding: 0 0 30px;
+            }
+
+            .logo::after {
+                content: "A";
+                font-size: 25px;
+                color: #00d9ff;
+            }
+
+            .nav-title,
+            .side-nav a span:not(.nav-icon),
+            .help-box,
+            .logout span {
+                display: none;
+            }
+
+            .side-nav a {
+                justify-content: center;
+                padding: 13px 5px;
+            }
+
+            .sidebar-bottom {
+                left: 10px;
+                right: 10px;
+            }
+
+            .main-content {
+                width: calc(100% - 70px);
+                margin-left: 70px;
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 18px 13px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+            }
+
+            .welcome h1 {
+                font-size: 21px;
+            }
+
+            .user-mini > div:last-child {
+                display: none;
+            }
+
+            .balance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .balance-card.primary {
+                grid-column: span 1;
+            }
+
+            .balance-amount {
+                font-size: 27px;
+            }
+
+            .panel {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            Apex<span>Bank</span>
+        </div>
+
+        <div class="nav-title">
+            Main Menu
+        </div>
+
+        <nav class="side-nav">
+
+            <a href="dashboard.html" class="active">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="accounts.html">
+                <span class="nav-icon">▣</span>
+                <span>My Accounts</span>
+            </a>
+
+            <a href="transactions.html">
+                <span class="nav-icon">↕</span>
+                <span>Transactions</span>
+            </a>
+
+            <a href="transfer.html">
+                <span class="nav-icon">↗</span>
+                <span>Transfer Money</span>
+            </a>
+
+            <a href="payments.html">
+                <span class="nav-icon">▤</span>
+                <span>Payments</span>
+            </a>
+
+            <a href="loans.html">
+                <span class="nav-icon">◇</span>
+                <span>Loans</span>
+            </a>
+
+        </nav>
+
+        <div class="nav-title" style="margin-top:28px;">
+            Account
+        </div>
+
+        <nav class="side-nav">
+
+            <a href="profile.html">
+                <span class="nav-icon">●</span>
+                <span>Profile</span>
+            </a>
+
+            <a href="support.html">
+                <span class="nav-icon">?</span>
+                <span>Support</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="help-box">
+                <strong>Need Help?</strong>
+                <small>
+                    Our support team is available whenever you need us.
+                </small>
+            </div>
+
+            <button class="logout" onclick="logout()">
+                <span>↪ &nbsp; Logout</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="welcome">
+                <h1>Good afternoon, Alex 👋</h1>
+
+                <p>
+                    Here's what's happening with your accounts today.
+                </p>
+            </div>
+
+            <div class="top-actions">
+
+                <div class="notification">
+                    ♢
+                </div>
+
+                <div class="user-mini">
+
+                    <div class="avatar">
+                        A
+                    </div>
+
+                    <div>
+                        <strong>Alex Morgan</strong>
+                        <small>Premium Customer</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- BALANCE CARDS -->
+
+        <section class="balance-grid">
+
+            <div class="balance-card primary">
+
+                <div class="balance-label">
+                    TOTAL BALANCE
+                </div>
+
+                <div class="balance-amount">
+                    ₹2,48,650.75
+                </div>
+
+                <div class="account-number">
+                    Savings Account •••• 4821
+                </div>
+
+            </div>
+
+
+            <div class="balance-card">
+
+                <div class="card-title">
+                    THIS MONTH'S INCOME
+                </div>
+
+                <div class="small-amount">
+                    ₹85,000
+                </div>
+
+                <div class="positive">
+                    ↑ 12.5% from last month
+                </div>
+
+            </div>
+
+
+            <div class="balance-card">
+
+                <div class="card-title">
+                    THIS MONTH'S SPENDING
+                </div>
+
+                <div class="small-amount">
+                    ₹32,450
+                </div>
+
+                <div class="positive">
+                    ↓ 8.2% from last month
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MAIN GRID -->
+
+        <div class="content-grid">
+
+            <!-- LEFT COLUMN -->
+
+            <div>
+
+                <!-- TRANSACTIONS -->
+
+                <section class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>Recent Transactions</h2>
+
+                        <a href="transactions.html">
+                            View All →
+                        </a>
+
+                    </div>
+
+
+                    <div class="transaction">
+
+                        <div class="transaction-left">
+
+                            <div class="transaction-icon">
+                                🛒
+                            </div>
+
+                            <div>
+                                <div class="transaction-name">
+                                    Online Shopping
+                                </div>
+
+                                <div class="transaction-date">
+                                    Today • 10:42 AM
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="transaction-amount expense">
+                            -₹2,450
+                        </div>
+
+                    </div>
+
+
+                    <div class="transaction">
+
+                        <div class="transaction-left">
+
+                            <div class="transaction-icon">
+                                💼
+                            </div>
+
+                            <div>
+                                <div class="transaction-name">
+                                    Salary Credit
+                                </div>
+
+                                <div class="transaction-date">
+                                    Sep 01 • 09:15 AM
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="transaction-amount income">
+                            +₹85,000
+                        </div>
+
+                    </div>
+
+
+                    <div class="transaction">
+
+                        <div class="transaction-left">
+
+                            <div class="transaction-icon">
+                                ⚡
+                            </div>
+
+                            <div>
+                                <div class="transaction-name">
+                                    Electricity Bill
+                                </div>
+
+                                <div class="transaction-date">
+                                    Aug 29 • 06:30 PM
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="transaction-amount expense">
+                            -₹1,280
+                        </div>
+
+                    </div>
+
+
+                    <div class="transaction">
+
+                        <div class="transaction-left">
+
+                            <div class="transaction-icon">
+                                ☕
+                            </div>
+
+                            <div>
+                                <div class="transaction-name">
+                                    Cafe Coffee
+                                </div>
+
+                                <div class="transaction-date">
+                                    Aug 28 • 04:20 PM
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="transaction-amount expense">
+                            -₹420
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SPENDING CHART -->
+
+                <section class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>Spending Overview</h2>
+
+                        <span style="color:#77859b;font-size:11px;">
+                            Last 7 days
+                        </span>
+
+                    </div>
+
+                    <div class="chart">
+
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+
+                    </div>
+
+                    <div class="chart-labels">
+
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+                        <span>Sun</span>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- RIGHT COLUMN -->
+
+            <div>
+
+                <!-- VIRTUAL CARD -->
+
+                <section class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>My Card</h2>
+
+                        <a href="accounts.html">
+                            Manage
+                        </a>
+
+                    </div>
+
+                    <div class="virtual-card">
+
+                        <div class="virtual-card-top">
+
+                            <strong>ApexBank</strong>
+
+                            <span class="contactless">
+                                ))))
+                            </span>
+
+                        </div>
+
+                        <div class="card-chip"></div>
+
+                        <div class="card-number">
+                            •••• &nbsp; •••• &nbsp; •••• &nbsp; 4821
+                        </div>
+
+                        <div class="card-bottom">
+
+                            <div>
+                                <small>CARD HOLDER</small>
+                                <strong>ALEX MORGAN</strong>
+                            </div>
+
+                            <div>
+                                <small>VALID THRU</small>
+                                <strong>12/29</strong>
+                            </div>
+
+                            <div>
+                                <small>TYPE</small>
+                                <strong>VISA</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <section class="panel">
+
+                    <div class="panel-header">
+                        <h2>Quick Actions</h2>
+                    </div>
+
+                    <div class="quick-actions">
+
+                        <a href="transfer.html" class="quick-action">
+
+                            <div class="quick-action-icon">
+                                ↗
+                            </div>
+
+                            <strong>Send Money</strong>
+
+                            <small>Transfer funds</small>
+
+                        </a>
+
+
+                        <a href="payments.html" class="quick-action">
+
+                            <div class="quick-action-icon">
+                                ▤
+                            </div>
+
+                            <strong>Pay Bills</strong>
+
+                            <small>Manage payments</small>
+
+                        </a>
+
+
+                        <a href="accounts.html" class="quick-action">
+
+                            <div class="quick-action-icon">
+                                +
+                            </div>
+
+                            <strong>Add Account</strong>
+
+                            <small>Link account</small>
+
+                        </a>
+
+
+                        <a href="support.html" class="quick-action">
+
+                            <div class="quick-action-icon">
+                                ?
+                            </div>
+
+                            <strong>Get Support</strong>
+
+                            <small>We're here to help</small>
+
+                        </a>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SECURITY -->
+
+                <section class="panel">
+
+                    <div class="panel-header">
+                        <h2>Security Status</h2>
+                    </div>
+
+                    <div style="
+                        display:flex;
+                        align-items:center;
+                        gap:12px;
+                        padding:13px;
+                        border-radius:12px;
+                        background:rgba(70,221,176,.06);
+                        border:1px solid rgba(70,221,176,.12);
+                    ">
+
+                        <div style="
+                            width:35px;
+                            height:35px;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            border-radius:50%;
+                            background:rgba(70,221,176,.1);
+                            color:#46ddb0;
+                        ">
+                            ✓
+                        </div>
+
+                        <div>
+                            <strong style="font-size:12px;">
+                                Account Protected
+                            </strong>
+
+                            <div style="
+                                color:#6d7c91;
+                                font-size:10px;
+                                margin-top:4px;
+                            ">
+                                All security checks are active
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    function logout() {
+
+        const confirmLogout =
+            confirm("Are you sure you want to logout?");
+
+        if (confirmLogout) {
+            window.location.href = "login.html";
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

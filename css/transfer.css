@@ -1,0 +1,1345 @@
+/* =========================================================
+   APEXBANK 3D - TRANSFER PAGE
+   Works with the existing style.css
+   ========================================================= */
+
+.page-hero {
+    width: min(var(--container), 92%);
+    min-height: 420px;
+    margin: 20px auto 0;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 60px;
+}
+
+.page-hero-content {
+    max-width: 650px;
+}
+
+.page-hero-content h1 {
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -3px;
+    margin: 12px 0 20px;
+    font-weight: 800;
+}
+
+.page-hero-content h1 span {
+    background: linear-gradient(90deg, #8179ff, #00d9ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.page-hero-content p {
+    max-width: 570px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   BALANCE CARD
+   ========================================================= */
+
+.floating-balance-card {
+    position: relative;
+    padding: 30px;
+    min-height: 190px;
+    border: 1px solid var(--border);
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.09),
+            rgba(255,255,255,0.025)
+        );
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+
+
+    transform: perspective(900px) rotateY(-4deg);
+    transition: 0.4s ease;
+    overflow: hidden;
+}
+
+.floating-balance-card::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    right: -100px;
+    top: -100px;
+    border-radius: 50%;
+    background: rgba(108,99,255,0.18);
+    filter: blur(25px);
+}
+
+.floating-balance-card:hover {
+    transform:
+        perspective(900px)
+        rotateY(0deg)
+        translateY(-8px);
+}
+
+.balance-top {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.balance-icon {
+    width: 35px;
+    height: 35px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 10px;
+
+    background: rgba(108,99,255,0.15);
+    border: 1px solid rgba(108,99,255,0.2);
+
+    color: #8b87ff;
+}
+
+.floating-balance-card h2 {
+    position: relative;
+    z-index: 2;
+
+    margin: 20px 0;
+
+    font-size: 32px;
+    letter-spacing: -1.5px;
+}
+
+.balance-footer {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: var(--muted-dark);
+    font-size: 10px;
+}
+
+.secure-status {
+    color: var(--success);
+}
+
+/* =========================================================
+   TRANSFER SECTION
+   ========================================================= */
+
+.transfer-section {
+    width: min(var(--container), 92%);
+    margin: 30px auto 110px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(330px, 0.8fr);
+    gap: 25px;
+
+    align-items: start;
+}
+
+.transfer-card,
+.summary-card,
+.recent-card,
+.security-card {
+    border: 1px solid var(--border);
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.075),
+            rgba(255,255,255,0.025)
+        );
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.25);
+
+    position: relative;
+    overflow: hidden;
+}
+
+.transfer-card {
+    padding: 35px;
+}
+
+.transfer-card::before,
+.summary-card::before,
+.recent-card::before {
+    content: "";
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -90px;
+    top: -90px;
+
+    border-radius: 50%;
+
+    background: rgba(108,99,255,0.1);
+    filter: blur(20px);
+
+    pointer-events: none;
+}
+
+/* =========================================================
+   CARD HEADING
+   ========================================================= */
+
+.card-heading,
+.summary-header,
+.recent-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.card-heading {
+    margin-bottom: 32px;
+}
+
+.card-heading h2 {
+    margin-top: 8px;
+    font-size: 27px;
+    letter-spacing: -1px;
+}
+
+.transfer-shield {
+    width: 45px;
+    height: 45px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 14px;
+
+    color: var(--success);
+
+    background: rgba(89,230,161,0.08);
+    border: 1px solid rgba(89,230,161,0.15);
+
+    box-shadow:
+        0 10px 30px rgba(89,230,161,0.08);
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+
+    color: #dfe3f2;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    margin-bottom: 9px;
+}
+
+.label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.optional {
+    color: var(--muted-dark);
+    font-size: 9px;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+/* =========================================================
+   TRANSFER TYPES
+   ========================================================= */
+
+.transfer-types {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.transfer-type {
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 12px;
+
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    background: rgba(255,255,255,0.025);
+
+    color: var(--text);
+
+    text-align: left;
+
+    transition: 0.3s ease;
+}
+
+.transfer-type:hover {
+    border-color: rgba(108,99,255,0.4);
+    transform: translateY(-2px);
+}
+
+.transfer-type.active {
+    border-color: rgba(108,99,255,0.6);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(108,99,255,0.16),
+            rgba(0,217,255,0.04)
+        );
+
+    box-shadow:
+        0 10px 30px rgba(108,99,255,0.12);
+}
+
+.type-icon {
+    width: 35px;
+    height: 35px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 10px;
+
+    background: rgba(108,99,255,0.12);
+    color: #8580ff;
+
+    font-size: 16px;
+}
+
+.transfer-type strong {
+    display: block;
+    font-size: 10px;
+}
+
+.transfer-type small {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 8px;
+    margin-top: 4px;
+}
+
+/* =========================================================
+   SELECT
+   ========================================================= */
+
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper select {
+    width: 100%;
+
+    appearance: none;
+
+    padding: 14px 42px 14px 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,0.035);
+
+    color: var(--text);
+
+    outline: none;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+.select-wrapper select:focus {
+    border-color: rgba(108,99,255,0.55);
+    box-shadow: 0 0 0 3px rgba(108,99,255,0.08);
+}
+
+.select-wrapper select option {
+    background: #0a1024;
+    color: white;
+}
+
+.select-arrow {
+    position: absolute;
+
+    right: 14px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: var(--muted);
+
+    pointer-events: none;
+}
+
+/* =========================================================
+   RECIPIENT
+   ========================================================= */
+
+.add-recipient {
+    border: 0;
+    background: transparent;
+
+    color: #8580ff;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.recipient-box {
+    min-height: 65px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 10px 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.035);
+
+    position: relative;
+}
+
+.recipient-avatar,
+.recent-avatar {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(108,99,255,0.3),
+            rgba(0,217,255,0.16)
+        );
+
+    color: #dfe4ff;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.recipient-avatar.large {
+    width: 46px;
+    height: 46px;
+}
+
+.recipient-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.recipient-info strong {
+    display: block;
+    font-size: 11px;
+}
+
+.recipient-info small {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    margin-top: 4px;
+}
+
+.verified {
+    color: var(--success);
+}
+
+/* =========================================================
+   AMOUNT
+   ========================================================= */
+
+.amount-input {
+    display: flex;
+    align-items: center;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.035);
+
+    overflow: hidden;
+
+    transition: 0.3s;
+}
+
+.amount-input:focus-within {
+    border-color: rgba(108,99,255,0.55);
+
+    box-shadow:
+        0 0 0 3px rgba(108,99,255,0.08);
+}
+
+.amount-input > span {
+    padding-left: 16px;
+
+    color: #a8adff;
+
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.amount-input input {
+    width: 100%;
+
+    padding: 15px 16px;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.amount-input input::placeholder {
+    color: #4d5670;
+}
+
+.amount-input input::-webkit-inner-spin-button,
+.amount-input input::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+.amount-hint {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 7px;
+
+    color: var(--muted-dark);
+
+    font-size: 9px;
+}
+
+.amount-hint button {
+    border: 0;
+    background: transparent;
+
+    color: #8580ff;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   TEXT INPUT
+   ========================================================= */
+
+.text-input {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.035);
+
+    color: white;
+
+    outline: none;
+
+    font-size: 11px;
+
+    transition: 0.3s;
+}
+
+.text-input::placeholder {
+    color: var(--muted-dark);
+}
+
+.text-input:focus {
+    border-color: rgba(108,99,255,0.55);
+
+    box-shadow:
+        0 0 0 3px rgba(108,99,255,0.08);
+}
+
+/* =========================================================
+   CHECKBOX
+   ========================================================= */
+
+.schedule-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 5px 0 25px;
+}
+
+.checkbox-container {
+    display: flex !important;
+    align-items: center;
+
+    gap: 9px;
+
+    color: var(--muted) !important;
+
+    font-size: 10px !important;
+
+    margin: 0 !important;
+
+    cursor: pointer;
+}
+
+.checkbox-container input {
+    display: none;
+}
+
+.custom-checkbox {
+    width: 17px;
+    height: 17px;
+
+    border: 1px solid var(--border-light);
+    border-radius: 5px;
+
+    background: rgba(255,255,255,0.03);
+
+    position: relative;
+}
+
+.checkbox-container input:checked + .custom-checkbox {
+    background: linear-gradient(135deg, #7168ff, #4d9cff);
+    border-color: transparent;
+}
+
+.checkbox-container input:checked + .custom-checkbox::after {
+    content: "✓";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    color: white;
+    font-size: 10px;
+}
+
+.instant-label {
+    color: var(--success);
+    font-size: 9px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   TRANSFER BUTTON
+   ========================================================= */
+
+.transfer-submit {
+    width: 100%;
+}
+
+.security-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 15px;
+
+    color: var(--muted-dark);
+
+    font-size: 9px;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.transfer-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.summary-card,
+.recent-card {
+    padding: 25px;
+}
+
+.summary-header h3,
+.recent-heading h3 {
+    margin-top: 7px;
+
+    font-size: 17px;
+    letter-spacing: -0.4px;
+}
+
+.summary-icon {
+    width: 36px;
+    height: 36px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 10px;
+
+    color: #8580ff;
+
+    background: rgba(108,99,255,0.1);
+}
+
+.summary-recipient {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+.summary-recipient strong {
+    display: block;
+    font-size: 11px;
+}
+
+.summary-recipient span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    margin-top: 4px;
+}
+
+.summary-divider {
+    height: 1px;
+
+    background: var(--border);
+
+    margin: 20px 0;
+}
+
+.summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 8px 0;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.summary-row strong {
+    color: #e8ebf8;
+}
+
+.summary-row .free {
+    color: var(--success);
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 12px;
+    padding-top: 16px;
+
+    border-top: 1px solid var(--border);
+
+    font-size: 12px;
+}
+
+.summary-total strong {
+    font-size: 17px;
+    color: white;
+}
+
+/* =========================================================
+   RECENT
+   ========================================================= */
+
+.recent-heading {
+    align-items: center;
+}
+
+.recent-heading a {
+    color: #8580ff;
+    font-size: 9px;
+}
+
+.recent-list {
+    margin-top: 20px;
+}
+
+.recent-item {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.recent-item:last-child {
+    border-bottom: 0;
+}
+
+.recent-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+}
+
+.recent-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.recent-info strong {
+    display: block;
+    font-size: 10px;
+}
+
+.recent-info span {
+    display: block;
+
+    color: var(--muted-dark);
+
+    font-size: 8px;
+
+    margin-top: 4px;
+}
+
+.recent-amount {
+    text-align: right;
+}
+
+.recent-amount strong {
+    display: block;
+
+    color: #e6e9f5;
+
+    font-size: 10px;
+}
+
+.recent-amount .completed {
+    color: var(--success);
+
+    font-size: 8px;
+
+    margin-top: 4px;
+}
+
+/* =========================================================
+   SECURITY CARD
+   ========================================================= */
+
+.security-card {
+    padding: 20px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(89,230,161,0.055),
+            rgba(255,255,255,0.02)
+        );
+}
+
+.security-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 11px;
+
+    background: rgba(89,230,161,0.08);
+
+    color: var(--success);
+}
+
+.security-card strong {
+    font-size: 10px;
+}
+
+.security-card p {
+    color: var(--muted);
+
+    font-size: 8px;
+    line-height: 1.6;
+
+    margin-top: 5px;
+}
+
+/* =========================================================
+   INFO CARDS
+   ========================================================= */
+
+.transfer-info {
+    width: min(var(--container), 92%);
+
+    margin: 0 auto 110px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.info-card {
+    min-height: 120px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    padding: 24px;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.03);
+
+    transition: 0.35s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(108,99,255,0.35);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,0.2);
+}
+
+.info-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+
+    background: rgba(108,99,255,0.1);
+
+    color: #8580ff;
+}
+
+.info-card strong {
+    display: block;
+
+    font-size: 11px;
+}
+
+.info-card p {
+    color: var(--muted);
+
+    font-size: 9px;
+    line-height: 1.6;
+
+    margin-top: 6px;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.transfer-modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+
+    padding: 20px;
+}
+
+.transfer-modal.show {
+    display: flex;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(2,5,16,0.78);
+
+}
+
+.modal-box {
+    width: min(450px, 100%);
+
+    position: relative;
+    z-index: 2;
+
+    padding: 35px;
+
+    border: 1px solid var(--border-light);
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17,25,55,0.97),
+            rgba(7,12,30,0.97)
+        );
+
+    box-shadow:
+        0 40px 100px rgba(0,0,0,0.55);
+
+    text-align: center;
+
+    animation: modalIn 0.3s ease;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform:
+            translateY(20px)
+            scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    width: 32px;
+    height: 32px;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: rgba(255,255,255,0.04);
+
+    color: var(--muted);
+
+    font-size: 19px;
+}
+
+.modal-icon {
+    width: 55px;
+    height: 55px;
+
+    display: grid;
+    place-items: center;
+
+    margin: 0 auto 20px;
+
+    border-radius: 17px;
+
+    background: rgba(89,230,161,0.1);
+
+    border: 1px solid rgba(89,230,161,0.15);
+
+    color: var(--success);
+
+    font-size: 22px;
+}
+
+.modal-box h2 {
+    margin: 10px 0;
+
+    font-size: 25px;
+    letter-spacing: -1px;
+}
+
+.modal-box > p {
+    color: var(--muted);
+
+    font-size: 10px;
+
+    margin-bottom: 25px;
+}
+
+.confirm-details {
+    text-align: left;
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    padding: 5px 15px;
+
+    background: rgba(255,255,255,0.025);
+}
+
+.confirm-details > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.confirm-details > div:last-child {
+    border-bottom: 0;
+}
+
+.confirm-details span {
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+.confirm-details strong {
+    color: white;
+
+    font-size: 10px;
+
+    text-align: right;
+}
+
+.modal-actions {
+    display: grid;
+
+    grid-template-columns: 1fr 1.5fr;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.modal-actions .secondary-btn,
+.modal-actions .primary-btn {
+    width: 100%;
+}
+
+/* =========================================================
+   MOBILE NAV
+   ========================================================= */
+
+.mobile-nav {
+    display: none;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    .page-hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 50px 0 30px;
+    }
+
+    .floating-balance-card {
+        max-width: 600px;
+        width: 100%;
+        transform: none;
+    }
+
+    .transfer-section {
+        grid-template-columns: 1fr;
+    }
+
+    .transfer-sidebar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+
+    .security-card {
+        grid-column: 1 / -1;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .navbar {
+        height: 72px;
+    }
+
+    .nav-links,
+    .nav-actions .login-btn,
+    .nav-actions .primary-btn {
+        display: none;
+    }
+
+    .menu-btn {
+        display: grid;
+        place-items: center;
+    }
+
+    .mobile-nav {
+        width: min(var(--container), 92%);
+
+        margin: 0 auto;
+
+        padding: 12px;
+
+        border: 1px solid var(--border);
+        border-radius: 15px;
+
+        background: rgba(8,13,32,0.95);
+
+
+        position: relative;
+        z-index: 200;
+    }
+
+    .mobile-nav.show {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 4px;
+    }
+
+    .mobile-nav a {
+        padding: 13px;
+
+        border-radius: 9px;
+
+        color: var(--muted);
+
+        font-size: 12px;
+    }
+
+    .mobile-nav a.active,
+    .mobile-nav a:hover {
+        background: rgba(108,99,255,0.1);
+        color: white;
+    }
+
+    .page-hero {
+        min-height: auto;
+
+        padding-top: 35px;
+    }
+
+    .page-hero-content h1 {
+        font-size: 43px;
+        letter-spacing: -2px;
+    }
+
+    .transfer-card {
+        padding: 22px;
+    }
+
+    .transfer-types {
+        grid-template-columns: 1fr;
+    }
+
+    .transfer-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .security-card {
+        grid-column: auto;
+    }
+
+    .transfer-info {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-box {
+        padding: 28px 20px;
+    }
+
+}
+
+@media (max-width: 430px) {
+
+    .page-hero-content h1 {
+        font-size: 38px;
+    }
+
+    .floating-balance-card {
+        padding: 23px;
+    }
+
+    .floating-balance-card h2 {
+        font-size: 27px;
+    }
+
+    .card-heading h2 {
+        font-size: 23px;
+    }
+
+    .modal-actions {
+        grid-template-columns: 1fr;
+    }
+
+}
+

@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payments | ApexBank</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/3d.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .dashboard-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 250px;
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+            padding: 25px 15px;
+            background: linear-gradient(180deg, #07152f, #0b1f43);
+            color: white;
+        }
+
+        .sidebar-logo {
+            padding: 5px 15px 30px;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .sidebar-logo span {
+            color: #3b82f6;
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 15px;
+            border-radius: 10px;
+            color: #c8d2e5;
+            text-decoration: none;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255,255,255,.08);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .sidebar-menu a.active {
+            color: white;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            box-shadow: 0 8px 20px rgba(37,99,235,.25);
+        }
+
+        .menu-icon {
+            width: 22px;
+            text-align: center;
+        }
+
+        .logout-link {
+            margin-top: 25px;
+            padding-top: 18px !important;
+            border-top: 1px solid rgba(255,255,255,.1);
+            color: #ffb4b4 !important;
+        }
+
+        /* MAIN */
+
+        .main-content {
+            width: calc(100% - 250px);
+            margin-left: 250px;
+            padding: 28px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 22px;
+            margin-bottom: 25px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(20,35,60,.06);
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .topbar p {
+            margin: 6px 0 0;
+            color: #718096;
+            font-size: 13px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg,#2563eb,#7c3aed);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* PAYMENT CATEGORIES */
+
+        .section-title {
+            margin: 0 0 15px;
+            font-size: 19px;
+        }
+
+        .payment-categories {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .category-card {
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(20,35,60,.06);
+            cursor: pointer;
+            transition: .3s;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: #2563eb;
+        }
+
+        .category-card.active {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 14px;
+            border-radius: 13px;
+            background: #eff6ff;
+            font-size: 23px;
+        }
+
+        .category-card h3 {
+            margin: 0 0 5px;
+            font-size: 15px;
+        }
+
+        .category-card p {
+            margin: 0;
+            color: #7b8798;
+            font-size: 12px;
+        }
+
+        /* CONTENT GRID */
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: minmax(0,1.45fr) minmax(280px,.8fr);
+            gap: 25px;
+        }
+
+        .card {
+            padding: 25px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(25,40,70,.07);
+        }
+
+        .card-header {
+            margin-bottom: 23px;
+        }
+
+        .card-header h2 {
+            margin: 0 0 7px;
+            font-size: 21px;
+        }
+
+        .card-header p {
+            margin: 0;
+            color: #7b8798;
+            font-size: 13px;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #344054;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .form-control,
+        select {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #dbe2ea;
+            border-radius: 11px;
+            background: white;
+            outline: none;
+            font-size: 14px;
+            color: #172033;
+            transition: .25s;
+        }
+
+        .form-control:focus,
+        select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37,99,235,.08);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .input-wrapper .form-control {
+            padding-left: 42px;
+        }
+
+        .amount-wrapper {
+            position: relative;
+        }
+
+        .currency {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .amount-input {
+            padding-left: 42px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* QUICK AMOUNTS */
+
+        .quick-amounts {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .quick-amount {
+            padding: 7px 13px;
+            border: 1px solid #dbe2ea;
+            border-radius: 8px;
+            background: white;
+            color: #475467;
+            cursor: pointer;
+            font-size: 12px;
+            transition: .2s;
+        }
+
+        .quick-amount:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        /* BUTTON */
+
+        .pay-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg,#2563eb,#4f46e5);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            box-shadow: 0 10px 20px rgba(37,99,235,.2);
+        }
+
+        .pay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 25px rgba(37,99,235,.3);
+        }
+
+        /* BILL INFO */
+
+        .bill-info {
+            margin-top: 18px;
+            padding: 15px;
+            border-radius: 12px;
+            background: #f8fafc;
+            font-size: 12px;
+            color: #667085;
+            line-height: 1.6;
+        }
+
+        /* HISTORY */
+
+        .history-card {
+            margin-top: 25px;
+        }
+
+        .history-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .history-header h2 {
+            margin: 0;
+            font-size: 19px;
+        }
+
+        .view-all {
+            color: #2563eb;
+            font-size: 13px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .payment-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 15px 0;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .payment-item:last-child {
+            border-bottom: none;
+        }
+
+        .payment-item-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: #eff6ff;
+            font-size: 18px;
+        }
+
+        .payment-details {
+            flex: 1;
+        }
+
+        .payment-details strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .payment-details small {
+            color: #8a94a6;
+            font-size: 11px;
+        }
+
+        .payment-amount {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .completed {
+            color: #16a34a;
+            font-size: 10px;
+            margin-left: 6px;
+        }
+
+        /* SIDE SUMMARY */
+
+        .summary-card {
+            height: fit-content;
+        }
+
+        .summary-card h3 {
+            margin: 0 0 20px;
+            font-size: 18px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 13px 0;
+            border-bottom: 1px solid #edf0f5;
+            font-size: 13px;
+        }
+
+        .summary-row span:first-child {
+            color: #7b8798;
+        }
+
+        .summary-row strong {
+            text-align: right;
+        }
+
+        .total-box {
+            margin-top: 15px;
+            padding: 18px;
+            border-radius: 13px;
+            background: linear-gradient(135deg,#eff6ff,#f3f0ff);
+        }
+
+        .total-box span {
+            display: block;
+            margin-bottom: 5px;
+            color: #667085;
+            font-size: 12px;
+        }
+
+        .total-box strong {
+            color: #1d4ed8;
+            font-size: 25px;
+        }
+
+        .balance-box {
+            margin-top: 18px;
+            padding: 15px;
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+
+        .balance-box small {
+            color: #7b8798;
+        }
+
+        .balance-box strong {
+            display: block;
+            margin-top: 5px;
+            font-size: 17px;
+        }
+
+        .security-note {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+            padding: 13px;
+            border-radius: 11px;
+            background: #ecfdf3;
+            color: #067647;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(5,15,35,.65);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .success-box {
+            width: min(430px,100%);
+            padding: 35px;
+            border-radius: 22px;
+            background: white;
+            text-align: center;
+            animation: popIn .4s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(.85);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #16a34a;
+            font-size: 34px;
+        }
+
+        .success-box h2 {
+            margin: 0 0 8px;
+        }
+
+        .success-box p {
+            color: #718096;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .reference {
+            margin: 18px 0;
+            padding: 12px;
+            border-radius: 10px;
+            background: #f8fafc;
+            font-size: 13px;
+        }
+
+        .close-modal {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background: #172033;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1100px) {
+            .payment-categories {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main-content {
+                width: calc(100% - 210px);
+                margin-left: 210px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .dashboard-layout {
+                display: block;
+            }
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                min-height: auto;
+            }
+
+            .sidebar-logo {
+                text-align: center;
+            }
+
+            .sidebar-menu {
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .logout-link {
+                margin-top: 5px;
+            }
+
+            .main-content {
+                width: 100%;
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .topbar h1 {
+                font-size: 20px;
+            }
+
+            .user-profile {
+                display: none;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-categories {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .card {
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .sidebar-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-item {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            Apex<span>Bank</span>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="dashboard.html">
+                <span class="menu-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="accounts.html">
+                <span class="menu-icon">▣</span>
+                My Accounts
+            </a>
+
+            <a href="transactions.html">
+                <span class="menu-icon">↕</span>
+                Transactions
+            </a>
+
+            <a href="transfer.html">
+                <span class="menu-icon">⇄</span>
+                Transfer Money
+            </a>
+
+            <a href="payments.html" class="active">
+                <span class="menu-icon">▤</span>
+                Payments
+            </a>
+
+            <a href="loans.html">
+                <span class="menu-icon">◈</span>
+                Loans
+            </a>
+
+            <a href="profile.html">
+                <span class="menu-icon">●</span>
+                Profile
+            </a>
+
+            <a href="support.html">
+                <span class="menu-icon">?</span>
+                Support
+            </a>
+
+            <a href="login.html" class="logout-link" id="logoutBtn">
+                <span class="menu-icon">↪</span>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <div class="topbar">
+
+            <div>
+                <h1>Payments</h1>
+                <p>Pay your bills quickly and securely.</p>
+            </div>
+
+            <div class="user-profile">
+
+                <div>
+                    <strong>Mahalakshmi</strong>
+
+                    <small style="display:block;color:#7b8798;">
+                        Personal Banking
+                    </small>
+                </div>
+
+                <div class="avatar">
+                    M
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PAYMENT CATEGORIES -->
+
+        <h2 class="section-title">
+            Pay Bills & Services
+        </h2>
+
+        <div class="payment-categories">
+
+            <div class="category-card active"
+                 data-type="Electricity"
+                 onclick="selectCategory(this)">
+
+                <div class="category-icon">
+                    ⚡
+                </div>
+
+                <h3>Electricity</h3>
+
+                <p>Pay electricity bill</p>
+
+            </div>
+
+
+            <div class="category-card"
+                 data-type="Water"
+                 onclick="selectCategory(this)">
+
+                <div class="category-icon">
+                    💧
+                </div>
+
+                <h3>Water</h3>
+
+                <p>Pay water bill</p>
+
+            </div>
+
+
+            <div class="category-card"
+                 data-type="Mobile"
+                 onclick="selectCategory(this)">
+
+                <div class="category-icon">
+                    📱
+                </div>
+
+                <h3>Mobile Recharge</h3>
+
+                <p>Recharge your mobile</p>
+
+            </div>
+
+
+            <div class="category-card"
+                 data-type="Internet"
+                 onclick="selectCategory(this)">
+
+                <div class="category-icon">
+                    🌐
+                </div>
+
+                <h3>Internet</h3>
+
+                <p>Pay broadband bill</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="content-grid">
+
+            <!-- PAYMENT FORM -->
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <h2 id="paymentTitle">
+                        Electricity Bill
+                    </h2>
+
+                    <p id="paymentDescription">
+                        Enter your electricity account details.
+                    </p>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="provider">
+                            Service Provider
+                        </label>
+
+                        <select id="provider">
+
+                            <option value="">
+                                Select provider
+                            </option>
+
+                            <option>TANGEDCO</option>
+                            <option>Adani Electricity</option>
+                            <option>Tata Power</option>
+                            <option>BESCOM</option>
+                            <option>Other Provider</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="consumerNumber">
+                            Consumer / Account Number
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">▣</span>
+
+                            <input
+                                type="text"
+                                id="consumerNumber"
+                                class="form-control"
+                                placeholder="Enter account number"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="amount">
+                        Payment Amount
+                    </label>
+
+                    <div class="amount-wrapper">
+
+                        <span class="currency">₹</span>
+
+                        <input
+                            type="number"
+                            id="amount"
+                            class="form-control amount-input"
+                            placeholder="0.00"
+                            min="1"
+                            step="0.01"
+                        >
+
+                    </div>
+
+
+                    <div class="quick-amounts">
+
+                        <button
+                            type="button"
+                            class="quick-amount"
+                            onclick="setAmount(500)">
+                            ₹500
+                        </button>
+
+                        <button
+                            type="button"
+                            class="quick-amount"
+                            onclick="setAmount(1000)">
+                            ₹1,000
+                        </button>
+
+                        <button
+                            type="button"
+                            class="quick-amount"
+                            onclick="setAmount(2000)">
+                            ₹2,000
+                        </button>
+
+                        <button
+                            type="button"
+                            class="quick-amount"
+                            onclick="setAmount(5000)">
+                            ₹5,000
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="paymentAccount">
+                        Pay From
+                    </label>
+
+                    <select id="paymentAccount">
+
+                        <option value="savings">
+                            Savings Account •••• 4821
+                        </option>
+
+                        <option value="current">
+                            Current Account •••• 7294
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button class="pay-btn" id="payBtn">
+                    🔒 Pay Securely
+                </button>
+
+
+                <div class="bill-info">
+
+                    🛡️ Your payment information is securely
+                    processed in this demo banking interface.
+                    Never share your banking credentials with anyone.
+
+                </div>
+
+            </section>
+
+
+            <!-- SUMMARY -->
+
+            <aside class="card summary-card">
+
+                <h3>Payment Summary</h3>
+
+                <div class="summary-row">
+
+                    <span>Service</span>
+
+                    <strong id="summaryService">
+                        Electricity
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Provider</span>
+
+                    <strong id="summaryProvider">
+                        Not selected
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Payment Fee</span>
+
+                    <strong>₹0.00</strong>
+
+                </div>
+
+
+                <div class="total-box">
+
+                    <span>Total Payment</span>
+
+                    <strong id="summaryAmount">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="balance-box">
+
+                    <small>Available Balance</small>
+
+                    <strong id="availableBalance">
+                        ₹2,48,650.75
+                    </strong>
+
+                </div>
+
+
+                <div class="security-note">
+
+                    <span>🛡️</span>
+
+                    <span>
+                        Secure demo payment protected
+                        by ApexBank security.
+                    </span>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+
+        <!-- PAYMENT HISTORY -->
+
+        <section class="card history-card">
+
+            <div class="history-header">
+
+                <h2>
+                    Recent Payments
+                </h2>
+
+                <a href="transactions.html" class="view-all">
+                    View All
+                </a>
+
+            </div>
+
+
+            <div class="payment-item">
+
+                <div class="payment-item-icon">
+                    ⚡
+                </div>
+
+                <div class="payment-details">
+
+                    <strong>
+                        Electricity Bill
+                    </strong>
+
+                    <small>
+                        TANGEDCO • Sep 02, 2026
+                    </small>
+
+                </div>
+
+                <div class="payment-amount">
+
+                    -₹1,850.00
+
+                    <span class="completed">
+                        ● Completed
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="payment-item">
+
+                <div class="payment-item-icon">
+                    📱
+                </div>
+
+                <div class="payment-details">
+
+                    <strong>
+                        Mobile Recharge
+                    </strong>
+
+                    <small>
+                        Airtel • Aug 28, 2026
+                    </small>
+
+                </div>
+
+                <div class="payment-amount">
+
+                    -₹599.00
+
+                    <span class="completed">
+                        ● Completed
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="payment-item">
+
+                <div class="payment-item-icon">
+                    🌐
+                </div>
+
+                <div class="payment-details">
+
+                    <strong>
+                        Internet Bill
+                    </strong>
+
+                    <small>
+                        ACT Fibernet • Aug 21, 2026
+                    </small>
+
+                </div>
+
+                <div class="payment-amount">
+
+                    -₹1,099.00
+
+                    <span class="completed">
+                        ● Completed
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="payment-item">
+
+                <div class="payment-item-icon">
+                    💧
+                </div>
+
+                <div class="payment-details">
+
+                    <strong>
+                        Water Bill
+                    </strong>
+
+                    <small>
+                        Metro Water • Aug 15, 2026
+                    </small>
+
+                </div>
+
+                <div class="payment-amount">
+
+                    -₹480.00
+
+                    <span class="completed">
+                        ● Completed
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- SUCCESS MODAL -->
+
+<div class="modal" id="successModal">
+
+    <div class="success-box">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>
+            Payment Successful!
+        </h2>
+
+        <p>
+            Your demo bill payment has been
+            processed successfully.
+        </p>
+
+        <div class="reference">
+
+            Reference ID:
+            <strong id="referenceId">
+                APX000000
+            </strong>
+
+        </div>
+
+        <button class="close-modal" onclick="closeSuccess()">
+            Done
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const amountInput =
+        document.getElementById("amount");
+
+    const summaryAmount =
+        document.getElementById("summaryAmount");
+
+    const provider =
+        document.getElementById("provider");
+
+    const summaryProvider =
+        document.getElementById("summaryProvider");
+
+    const paymentAccount =
+        document.getElementById("paymentAccount");
+
+    const availableBalance =
+        document.getElementById("availableBalance");
+
+    let balance = 248650.75;
+
+
+    /* FORMAT MONEY */
+
+    function formatCurrency(value) {
+
+        return "₹" + Number(value).toLocaleString("en-IN", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+    }
+
+
+    /* AMOUNT UPDATE */
+
+    amountInput.addEventListener("input", function () {
+
+        const amount = Number(this.value) || 0;
+
+        summaryAmount.textContent =
+            formatCurrency(amount);
+
+    });
+
+
+    /* QUICK AMOUNT */
+
+    function setAmount(amount) {
+
+        amountInput.value = amount;
+
+        summaryAmount.textContent =
+            formatCurrency(amount);
+
+    }
+
+
+    /* PROVIDER UPDATE */
+
+    provider.addEventListener("change", function () {
+
+        summaryProvider.textContent =
+            this.value || "Not selected";
+
+    });
+
+
+    /* ACCOUNT CHANGE */
+
+    paymentAccount.addEventListener("change", function () {
+
+        if (this.value === "current") {
+
+            balance = 84500;
+
+        } else {
+
+            balance = 248650.75;
+
+        }
+
+        availableBalance.textContent =
+            formatCurrency(balance);
+
+    });
+
+
+    /* CATEGORY */
+
+    function selectCategory(card) {
+
+        document
+            .querySelectorAll(".category-card")
+            .forEach(item => {
+                item.classList.remove("active");
+            });
+
+        card.classList.add("active");
+
+        const type = card.dataset.type;
+
+        document.getElementById("summaryService")
+            .textContent = type;
+
+
+        const title =
+            document.getElementById("paymentTitle");
+
+        const description =
+            document.getElementById("paymentDescription");
+
+
+        if (type === "Electricity") {
+
+            title.textContent = "Electricity Bill";
+
+            description.textContent =
+                "Enter your electricity account details.";
+
+        }
+
+        else if (type === "Water") {
+
+            title.textContent = "Water Bill";
+
+            description.textContent =
+                "Enter your water connection details.";
+
+        }
+
+        else if (type === "Mobile") {
+
+            title.textContent = "Mobile Recharge";
+
+            description.textContent =
+                "Enter your mobile number and recharge amount.";
+
+        }
+
+        else if (type === "Internet") {
+
+            title.textContent = "Internet Bill";
+
+            description.textContent =
+                "Enter your broadband account details.";
+
+        }
+
+    }
+
+
+    /* PAYMENT */
+
+    document
+        .getElementById("payBtn")
+        .addEventListener("click", function () {
+
+            const amount =
+                Number(amountInput.value);
+
+            const consumer =
+                document
+                .getElementById("consumerNumber")
+                .value.trim();
+
+
+            if (!provider.value) {
+
+                alert("Please select a service provider.");
+
+                provider.focus();
+
+                return;
+
+            }
+
+
+            if (!consumer) {
+
+                alert(
+                    "Please enter your consumer/account number."
+                );
+
+                document
+                    .getElementById("consumerNumber")
+                    .focus();
+
+                return;
+
+            }
+
+
+            if (!amount || amount <= 0) {
+
+                alert("Please enter a valid payment amount.");
+
+                amountInput.focus();
+
+                return;
+
+            }
+
+
+            if (amount > balance) {
+
+                alert("Insufficient balance for this payment.");
+
+                return;
+
+            }
+
+
+            const reference =
+                "APX" +
+                Math.floor(
+                    100000 +
+                    Math.random() * 900000
+                );
+
+
+            document
+                .getElementById("referenceId")
+                .textContent = reference;
+
+
+            document
+                .getElementById("successModal")
+                .classList.add("show");
+
+        });
+
+
+    /* CLOSE MODAL */
+
+    function closeSuccess() {
+
+        document
+            .getElementById("successModal")
+            .classList.remove("show");
+
+        amountInput.value = "";
+
+        summaryAmount.textContent = "₹0.00";
+
+    }
+
+
+    /* LOGOUT */
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener("click", function () {
+
+            localStorage.removeItem("apexBankUser");
+
+        });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ApexBank | Open Account</title>
+
+    <!-- Correct paths because register.html is in the root folder -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/3d.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(0, 212, 255, 0.14),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(100, 80, 255, 0.16),
+                    transparent 30%
+                ),
+                #050914;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           REGISTER PAGE
+        ========================= */
+
+        .register-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* =========================
+           BACKGROUND ORBS
+        ========================= */
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            pointer-events: none;
+            animation: floatOrb 7s ease-in-out infinite;
+        }
+
+        .orb-one {
+            width: 280px;
+            height: 280px;
+            background: rgba(0, 200, 255, 0.08);
+            top: -100px;
+            left: -80px;
+        }
+
+        .orb-two {
+            width: 350px;
+            height: 350px;
+            background: rgba(91, 70, 255, 0.09);
+            bottom: -150px;
+            right: -100px;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatOrb {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-25px);
+            }
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .register-container {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 35px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* =========================
+           LEFT CONTENT
+        ========================= */
+
+        .register-info {
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            color: #aab5c8;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 50px;
+            transition: 0.3s ease;
+        }
+
+        .back-home:hover {
+            color: #00d9ff;
+            transform: translateX(-4px);
+        }
+
+        .brand {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        .brand span {
+            color: #00d9ff;
+        }
+
+        .register-info h1 {
+            font-size: clamp(38px, 5vw, 62px);
+            line-height: 1.05;
+            margin: 0 0 20px;
+        }
+
+        .register-info h1 span {
+            color: #00d9ff;
+        }
+
+        .register-info > p {
+            color: #aab5c8;
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 500px;
+            margin-bottom: 35px;
+        }
+
+        /* =========================
+           BENEFITS
+        ========================= */
+
+        .benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: #dce5f3;
+        }
+
+        .benefit-icon {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            color: #00d9ff;
+            font-size: 18px;
+            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.08);
+        }
+
+        .benefit strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .benefit small {
+            color: #7f8ca3;
+        }
+
+        /* =========================
+           REGISTER CARD
+        ========================= */
+
+        .register-card {
+            padding: 42px;
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.07),
+                    rgba(255, 255, 255, 0.025)
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.09);
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            transform: perspective(1200px) rotateY(-1deg);
+            transition: 0.4s ease;
+        }
+
+        .register-card:hover {
+            transform: perspective(1200px) rotateY(0deg) translateY(-3px);
+            border-color: rgba(0, 217, 255, 0.18);
+        }
+
+        /* =========================
+           FORM HEADING
+        ========================= */
+
+        .form-heading {
+            margin-bottom: 28px;
+        }
+
+        .form-heading h2 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .form-heading p {
+            margin: 0;
+            color: #8290a8;
+            font-size: 14px;
+        }
+
+        /* =========================
+           FORM ROW
+        ========================= */
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #cbd5e5;
+        }
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            background: rgba(255, 255, 255, 0.045);
+
+            color: #ffffff;
+            outline: none;
+
+            transition: 0.3s ease;
+            font-size: 14px;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #647188;
+        }
+
+        .input-wrapper select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .input-wrapper select option {
+            background: #10182a;
+            color: #ffffff;
+        }
+
+        .input-wrapper input:focus,
+        .input-wrapper select:focus {
+            border-color: #00d9ff;
+
+            background: rgba(0, 217, 255, 0.05);
+
+            box-shadow:
+                0 0 0 3px rgba(0, 217, 255, 0.08),
+                0 8px 25px rgba(0, 217, 255, 0.05);
+        }
+
+        /* =========================
+           PASSWORD TOGGLE
+        ========================= */
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            border: 0;
+            background: none;
+
+            color: #7f8ca3;
+            cursor: pointer;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .password-toggle:hover {
+            color: #00d9ff;
+        }
+
+        /* =========================
+           TERMS
+        ========================= */
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+
+            margin: 5px 0 22px;
+
+            font-size: 12px;
+            line-height: 1.5;
+
+            color: #8290a8;
+        }
+
+        .terms input {
+            margin-top: 3px;
+            accent-color: #00d9ff;
+            cursor: pointer;
+        }
+
+        .terms a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           CREATE BUTTON
+        ========================= */
+
+        .create-btn {
+            width: 100%;
+            height: 52px;
+
+            border: none;
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00d9ff,
+                    #168cff
+                );
+
+            color: #03111b;
+
+            font-size: 15px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+
+            box-shadow:
+                0 12px 30px rgba(0, 183, 255, 0.2);
+        }
+
+        .create-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 16px 35px rgba(0, 183, 255, 0.3);
+        }
+
+        .create-btn:active {
+            transform: translateY(0);
+        }
+
+        .create-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =========================
+           LOGIN LINK
+        ========================= */
+
+        .login-link {
+            text-align: center;
+            margin-top: 22px;
+
+            color: #8290a8;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #00d9ff;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           SECURITY NOTE
+        ========================= */
+
+        .security-note {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+
+            color: #66748c;
+            font-size: 11px;
+
+            margin-top: 18px;
+        }
+
+        /* =========================
+           SUCCESS MESSAGE
+        ========================= */
+
+        .success-message {
+            display: none;
+
+            padding: 12px;
+            margin-bottom: 18px;
+
+            border-radius: 10px;
+
+            background: rgba(0, 220, 150, 0.1);
+            border: 1px solid rgba(0, 220, 150, 0.25);
+
+            color: #58e6b0;
+
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* =========================
+           ERROR MESSAGE
+        ========================= */
+
+        .error-message {
+            display: none;
+
+            padding: 12px;
+            margin-bottom: 18px;
+
+            border-radius: 10px;
+
+            background: rgba(255, 80, 100, 0.08);
+            border: 1px solid rgba(255, 80, 100, 0.2);
+
+            color: #ff8d9c;
+
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .register-container {
+                grid-template-columns: 1fr;
+                max-width: 650px;
+            }
+
+            .register-info {
+                padding: 10px 10px 20px;
+            }
+
+            .back-home {
+                margin-bottom: 25px;
+            }
+
+            .register-info h1 {
+                font-size: 42px;
+            }
+
+            .benefits {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .register-card {
+                transform: none;
+            }
+
+            .register-card:hover {
+                transform: translateY(-2px);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .register-page {
+                padding: 20px 14px;
+            }
+
+            .register-card {
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+
+            .register-info {
+                padding: 5px;
+            }
+
+            .register-info h1 {
+                font-size: 36px;
+            }
+
+            .register-info > p {
+                font-size: 14px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .brand {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="register-page">
+
+        <!-- Background -->
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+
+        <div class="register-container">
+
+            <!-- =========================
+                 LEFT CONTENT
+            ========================== -->
+
+            <section class="register-info">
+
+                <a href="index.html" class="back-home">
+                    ← Back to Home
+                </a>
+
+                <div class="brand">
+                    Apex<span>Bank</span>
+                </div>
+
+                <h1>
+                    Start your
+                    <span>financial journey.</span>
+                </h1>
+
+                <p>
+                    Open your ApexBank account and experience modern,
+                    secure and intelligent banking designed around you.
+                </p>
+
+                <div class="benefits">
+
+                    <div class="benefit">
+                        <div class="benefit-icon">✓</div>
+
+                        <div>
+                            <strong>Fast Account Setup</strong>
+                            <small>Simple digital registration</small>
+                        </div>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">◆</div>
+
+                        <div>
+                            <strong>Secure Banking</strong>
+                            <small>Protected account experience</small>
+                        </div>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">↗</div>
+
+                        <div>
+                            <strong>Smart Dashboard</strong>
+                            <small>Manage your finances easily</small>
+                        </div>
+                    </div>
+
+                    <div class="benefit">
+                        <div class="benefit-icon">24</div>
+
+                        <div>
+                            <strong>24/7 Access</strong>
+                            <small>Bank anytime, anywhere</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 REGISTER FORM
+            ========================== -->
+
+            <section class="register-card">
+
+                <div class="form-heading">
+
+                    <h2>Create Account</h2>
+
+                    <p>
+                        Fill in your details to get started.
+                    </p>
+
+                </div>
+
+                <!-- Success -->
+                <div
+                    class="success-message"
+                    id="successMessage"
+                >
+                    Account created successfully! Redirecting...
+                </div>
+
+                <!-- Error -->
+                <div
+                    class="error-message"
+                    id="errorMessage"
+                ></div>
+
+
+                <form id="registerForm">
+
+                    <!-- First + Last Name -->
+
+                    <div class="form-row">
+
+                        <div class="input-group">
+
+                            <label for="firstName">
+                                First Name
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <input
+                                    type="text"
+                                    id="firstName"
+                                    placeholder="Enter first name"
+                                    autocomplete="given-name"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label for="lastName">
+                                Last Name
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <input
+                                    type="text"
+                                    id="lastName"
+                                    placeholder="Enter last name"
+                                    autocomplete="family-name"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="input-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="you@example.com"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div class="input-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="Enter 10-digit phone number"
+                                pattern="[0-9]{10}"
+                                maxlength="10"
+                                inputmode="numeric"
+                                autocomplete="tel"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Account Type -->
+
+                    <div class="input-group">
+
+                        <label for="accountType">
+                            Account Type
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <select
+                                id="accountType"
+                                required
+                            >
+
+                                <option value="">
+                                    Select account type
+                                </option>
+
+                                <option value="savings">
+                                    Savings Account
+                                </option>
+
+                                <option value="current">
+                                    Current Account
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Passwords -->
+
+                    <div class="form-row">
+
+                        <!-- Password -->
+
+                        <div class="input-group">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    placeholder="Create password"
+                                    minlength="8"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword('password', this)"
+                                >
+                                    Show
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Confirm Password -->
+
+                        <div class="input-group">
+
+                            <label for="confirmPassword">
+                                Confirm Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    placeholder="Confirm password"
+                                    minlength="8"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword('confirmPassword', this)"
+                                >
+                                    Show
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Terms -->
+
+                    <div class="terms">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            required
+                        >
+
+                        <label for="terms">
+
+                            I agree to the
+                            <a href="#">Terms & Conditions</a>
+                            and
+                            <a href="#">Privacy Policy</a>.
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Create -->
+
+                    <button
+                        type="submit"
+                        class="create-btn"
+                        id="createBtn"
+                    >
+                        Create My Account →
+                    </button>
+
+                </form>
+
+
+                <!-- Login -->
+
+                <div class="login-link">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                </div>
+
+
+                <!-- Security -->
+
+                <div class="security-note">
+                    🔒 Your information is protected
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* =========================
+           PASSWORD TOGGLE
+        ========================== */
+
+        function togglePassword(id, button) {
+
+            const input = document.getElementById(id);
+
+            if (input.type === "password") {
+
+                input.type = "text";
+                button.textContent = "Hide";
+
+            } else {
+
+                input.type = "password";
+                button.textContent = "Show";
+
+            }
+        }
+
+
+        /* =========================
+           PHONE NUMBER
+        ========================== */
+
+        const phoneInput = document.getElementById("phone");
+
+        phoneInput.addEventListener("input", function () {
+
+            this.value = this.value
+                .replace(/\D/g, "")
+                .slice(0, 10);
+
+        });
+
+
+        /* =========================
+           FORM SUBMIT
+        ========================== */
+
+        document
+            .getElementById("registerForm")
+            .addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                const firstName =
+                    document.getElementById("firstName").value.trim();
+
+                const lastName =
+                    document.getElementById("lastName").value.trim();
+
+                const email =
+                    document.getElementById("email").value.trim();
+
+                const phone =
+                    document.getElementById("phone").value.trim();
+
+                const accountType =
+                    document.getElementById("accountType").value;
+
+                const password =
+                    document.getElementById("password").value;
+
+                const confirmPassword =
+                    document.getElementById("confirmPassword").value;
+
+                const success =
+                    document.getElementById("successMessage");
+
+                const error =
+                    document.getElementById("errorMessage");
+
+                const button =
+                    document.getElementById("createBtn");
+
+
+                /* Reset messages */
+
+                success.style.display = "none";
+                error.style.display = "none";
+
+
+                /* Password validation */
+
+                if (password.length < 8) {
+
+                    error.textContent =
+                        "Password must contain at least 8 characters.";
+
+                    error.style.display = "block";
+
+                    return;
+                }
+
+
+                /* Confirm password */
+
+                if (password !== confirmPassword) {
+
+                    error.textContent =
+                        "Passwords do not match.";
+
+                    error.style.display = "block";
+
+                    return;
+                }
+
+
+                /* Phone validation */
+
+                if (!/^[0-9]{10}$/.test(phone)) {
+
+                    error.textContent =
+                        "Please enter a valid 10-digit phone number.";
+
+                    error.style.display = "block";
+
+                    return;
+                }
+
+
+                /* Account type */
+
+                if (!accountType) {
+
+                    error.textContent =
+                        "Please select an account type.";
+
+                    error.style.display = "block";
+
+                    return;
+                }
+
+
+                /* Loading */
+
+                button.disabled = true;
+
+                button.textContent = "Creating Account...";
+
+
+                /* Demo registration */
+
+                setTimeout(function () {
+
+                    success.style.display = "block";
+
+                    button.textContent =
+                        "Account Created ✓";
+
+
+                    /*
+                     * Store basic demo profile data.
+                     * Do NOT store passwords here.
+                     */
+
+                    localStorage.setItem(
+                        "apexbankUser",
+                        JSON.stringify({
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email,
+                            phone: phone,
+                            accountType: accountType
+                        })
+                    );
+
+
+                    /* Redirect */
+
+                    setTimeout(function () {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    }, 1500);
+
+                }, 900);
+
+            });
+
+    </script>
+
+</body>
+</html>

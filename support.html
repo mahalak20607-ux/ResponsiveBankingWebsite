@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ApexBank | Support</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        /* ==============================
+           RESET
+        ============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(37,99,235,.08), transparent 25%),
+                radial-gradient(circle at 90% 20%, rgba(124,58,237,.08), transparent 25%),
+                #f4f7fb;
+            color: #172033;
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
+
+        /* ==============================
+           CONTAINER
+        ============================== */
+
+        .support-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        /* ==============================
+           HERO
+        ============================== */
+
+        .support-hero {
+            position: relative;
+            min-height: 340px;
+            padding: 55px;
+            border-radius: 30px;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            color: white;
+
+            background:
+                radial-gradient(circle at 85% 20%, rgba(255,255,255,.16), transparent 25%),
+                radial-gradient(circle at 15% 100%, rgba(6,182,212,.20), transparent 30%),
+                linear-gradient(135deg, #172554, #2563eb 55%, #7c3aed);
+
+            box-shadow:
+                0 25px 60px rgba(37,99,235,.25);
+        }
+
+        .support-hero::before {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            right: 130px;
+            top: -140px;
+            background: rgba(255,255,255,.06);
+        }
+
+        .support-hero::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            right: -80px;
+            bottom: -100px;
+            background: rgba(255,255,255,.06);
+        }
+
+        .support-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 760px;
+        }
+
+        .support-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 10px 18px;
+            margin-bottom: 20px;
+
+            border-radius: 50px;
+
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.18);
+
+            backdrop-filter: blur(12px);
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .support-tag i {
+            color: #67e8f9;
+        }
+
+        .support-hero h1 {
+            font-size: clamp(40px, 5vw, 62px);
+            line-height: 1.05;
+            letter-spacing: -2px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .support-hero h1 span {
+            background: linear-gradient(90deg, #67e8f9, #c4b5fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .support-hero p {
+            max-width: 700px;
+            color: rgba(255,255,255,.82);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* ==============================
+           HERO ICON
+        ============================== */
+
+        .hero-support-icon {
+            position: relative;
+            z-index: 2;
+
+            width: 155px;
+            height: 155px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 38px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.20),
+                    rgba(255,255,255,.05)
+                );
+
+            border: 1px solid rgba(255,255,255,.22);
+
+            box-shadow:
+                inset 0 2px 5px rgba(255,255,255,.15),
+                0 25px 45px rgba(0,0,0,.20);
+
+            transform:
+                perspective(700px)
+                rotateY(-12deg)
+                rotateX(8deg);
+        }
+
+        .hero-support-icon i {
+            font-size: 68px;
+            color: white;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,.25));
+        }
+
+        /* ==============================
+           SECTION
+        ============================== */
+
+        .support-section,
+        .faq-section {
+            margin-top: 70px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-heading h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section-heading p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* ==============================
+           SUPPORT GRID
+        ============================== */
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* ==============================
+           SUPPORT CARD
+        ============================== */
+
+        .support-card {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 255px;
+            padding: 30px;
+
+            border-radius: 25px;
+
+            background: rgba(255,255,255,.95);
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 18px 40px rgba(37,99,235,.08);
+
+            cursor: pointer;
+
+            transition:
+                transform .35s ease,
+                box-shadow .35s ease,
+                border-color .35s ease;
+        }
+
+        .support-card:hover {
+            transform:
+                translateY(-10px)
+                rotateX(2deg);
+
+            border-color: rgba(37,99,235,.25);
+
+            box-shadow:
+                0 28px 60px rgba(37,99,235,.17);
+        }
+
+        .support-card h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin: 20px 0 10px;
+        }
+
+        .support-card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .support-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-top: 20px;
+
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: gap .25s ease;
+        }
+
+        .support-card:hover .support-link {
+            gap: 14px;
+        }
+
+        /* ==============================
+           ICONS
+        ============================== */
+
+        .support-icon {
+            width: 62px;
+            height: 62px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 18px;
+
+            font-size: 24px;
+
+            box-shadow:
+                inset 0 2px 4px rgba(255,255,255,.6),
+                0 10px 22px rgba(0,0,0,.08);
+
+            transition:
+                transform .3s ease;
+        }
+
+        .support-card:hover .support-icon {
+            transform: translateY(-5px) rotate(-4deg);
+        }
+
+        .blue {
+            color: #2563eb;
+            background: linear-gradient(145deg,#dbeafe,#bfdbfe);
+        }
+
+        .purple {
+            color: #7c3aed;
+            background: linear-gradient(145deg,#ede9fe,#ddd6fe);
+        }
+
+        .cyan {
+            color: #0891b2;
+            background: linear-gradient(145deg,#cffafe,#a5f3fc);
+        }
+
+        .orange {
+            color: #ea580c;
+            background: linear-gradient(145deg,#ffedd5,#fed7aa);
+        }
+
+        .green {
+            color: #059669;
+            background: linear-gradient(145deg,#d1fae5,#a7f3d0);
+        }
+
+        .red {
+            color: #dc2626;
+            background: linear-gradient(145deg,#fee2e2,#fecaca);
+        }
+
+        /* ==============================
+           CONTACT SECTION
+        ============================== */
+
+        .contact-section {
+            margin-top: 80px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* ==============================
+           CONTACT INFO
+        ============================== */
+
+        .contact-info {
+            position: relative;
+            overflow: hidden;
+
+            padding: 45px;
+
+            border-radius: 28px;
+
+            color: white;
+
+            background:
+                radial-gradient(circle at 90% 10%, rgba(255,255,255,.12), transparent 25%),
+                linear-gradient(145deg,#172554,#2563eb 55%,#4f46e5);
+
+            box-shadow:
+                0 25px 55px rgba(37,99,235,.20);
+        }
+
+        .contact-label {
+            display: inline-block;
+
+            margin-bottom: 15px;
+
+            color: #67e8f9;
+
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .contact-info h2 {
+            font-size: 34px;
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+
+        .contact-info h2 span {
+            color: #67e8f9;
+        }
+
+        .contact-info > p {
+            color: rgba(255,255,255,.78);
+            line-height: 1.8;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* ==============================
+           CONTACT ITEMS
+        ============================== */
+
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            padding: 14px;
+
+            border-radius: 16px;
+
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.10);
+
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-item-icon {
+            width: 45px;
+            height: 45px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            color: #67e8f9;
+            background: rgba(255,255,255,.12);
+        }
+
+        .contact-item strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .contact-item span {
+            display: block;
+            color: rgba(255,255,255,.72);
+            font-size: 12px;
+        }
+
+        /* ==============================
+           FORM CARD
+        ============================== */
+
+        .support-form-card {
+            padding: 42px;
+
+            border-radius: 28px;
+
+            background: rgba(255,255,255,.97);
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow:
+                0 20px 45px rgba(37,99,235,.09);
+        }
+
+        .support-form-card h3 {
+            font-size: 25px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .support-form-card > p {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 27px;
+        }
+
+        /* ==============================
+           FORM
+        ============================== */
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+
+            color: #172033;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 13px;
+
+            background: #f8fafc;
+
+            outline: none;
+
+            color: #172033;
+
+            font-size: 13px;
+
+            transition:
+                border-color .25s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            background: white;
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 4px rgba(37,99,235,.08);
+        }
+
+        .form-group textarea {
+            min-height: 125px;
+            resize: vertical;
+        }
+
+        /* ==============================
+           BUTTON
+        ============================== */
+
+        .support-submit {
+            width: 100%;
+
+            padding: 15px 20px;
+
+            border: none;
+            border-radius: 14px;
+
+            color: white;
+
+            background:
+                linear-gradient(135deg,#2563eb,#7c3aed);
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 12px 25px rgba(37,99,235,.25);
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+        .support-submit:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 18px 35px rgba(37,99,235,.32);
+        }
+
+        .support-submit:active {
+            transform: translateY(0);
+        }
+
+        .support-submit i {
+            margin-right: 8px;
+        }
+
+        /* ==============================
+           STATUS
+        ============================== */
+
+        .support-status {
+            display: none;
+
+            margin-top: 15px;
+            padding: 12px 15px;
+
+            border-radius: 12px;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .support-status.success {
+            display: block;
+
+            color: #047857;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+        }
+
+        .support-status.error {
+            display: block;
+
+            color: #b91c1c;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        /* ==============================
+           FAQ
+        ============================== */
+
+        .faq-container {
+            max-width: 950px;
+            margin: auto;
+
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .faq-item {
+            overflow: hidden;
+
+            background: white;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+
+            box-shadow:
+                0 10px 25px rgba(15,23,42,.05);
+
+            transition:
+                border-color .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .faq-item.active {
+            border-color: rgba(37,99,235,.25);
+
+            box-shadow:
+                0 15px 35px rgba(37,99,235,.10);
+        }
+
+        .faq-question {
+            width: 100%;
+
+            padding: 20px 23px;
+
+            border: none;
+            background: transparent;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            text-align: left;
+
+            color: #172033;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .faq-question i {
+            width: 32px;
+            height: 32px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .faq-item.active .faq-question i {
+            color: white;
+            background:
+                linear-gradient(135deg,#2563eb,#7c3aed);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+
+            transition:
+                max-height .35s ease;
+        }
+
+        .faq-answer p {
+            padding: 0 23px 22px;
+
+            color: #64748b;
+
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        .support-footer {
+            margin-top: 75px;
+            padding: 30px 5px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .support-footer strong {
+            display: block;
+
+            font-size: 20px;
+            font-weight: 800;
+
+            background:
+                linear-gradient(135deg,#2563eb,#7c3aed);
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .support-footer span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #64748b;
+            font-size: 11px;
+        }
+
+        .support-footer p {
+            color: #64748b;
+            font-size: 11px;
+        }
+
+        /* ==============================
+           TABLET
+        ============================== */
+
+        @media (max-width: 1050px) {
+
+            .support-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 700px) {
+
+            .support-container {
+                padding: 15px;
+            }
+
+            .support-hero {
+                padding: 35px 25px;
+                min-height: auto;
+                border-radius: 23px;
+            }
+
+            .support-hero h1 {
+                font-size: 38px;
+                letter-spacing: -1px;
+            }
+
+            .support-hero p {
+                font-size: 13px;
+            }
+
+            .hero-support-icon {
+                display: none;
+            }
+
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .support-section,
+            .faq-section {
+                margin-top: 50px;
+            }
+
+            .section-heading h2 {
+                font-size: 27px;
+            }
+
+            .contact-section {
+                margin-top: 55px;
+            }
+
+            .contact-info,
+            .support-form-card {
+                padding: 28px 22px;
+                border-radius: 22px;
+            }
+
+            .contact-info h2 {
+                font-size: 28px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .support-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+
+        /* ==============================
+           SMALL MOBILE
+        ============================== */
+
+        @media (max-width: 420px) {
+
+            .support-container {
+                padding: 10px;
+            }
+
+            .support-hero {
+                padding: 30px 20px;
+            }
+
+            .support-hero h1 {
+                font-size: 32px;
+            }
+
+            .support-card {
+                padding: 23px;
+            }
+
+            .support-form-card {
+                padding: 23px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="support-container">
+
+    <!-- ==============================
+         HERO
+    ============================== -->
+
+    <section class="support-hero">
+
+        <div class="support-hero-content">
+
+            <span class="support-tag">
+                <i class="fa-solid fa-headset"></i>
+                ApexBank Support
+            </span>
+
+            <h1>
+                How Can We
+                <span>Help You?</span>
+            </h1>
+
+            <p>
+                Our support team is here to help you with accounts,
+                payments, loans, cards, security and other banking services.
+            </p>
+
+        </div>
+
+        <div class="hero-support-icon">
+            <i class="fa-solid fa-headset"></i>
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         QUICK SUPPORT
+    ============================== -->
+
+    <section class="support-section">
+
+        <div class="section-heading">
+
+            <h2>Quick Support</h2>
+
+            <p>
+                Choose a category to find the help you need.
+            </p>
+
+        </div>
+
+
+        <div class="support-grid">
+
+            <div class="support-card"
+                 onclick="openSupport('Account Support')">
+
+                <div class="support-icon blue">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <h3>Account Support</h3>
+
+                <p>
+                    Manage your account, profile, password
+                    and personal details.
+                </p>
+
+                <span class="support-link">
+                    Get Help
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+
+            </div>
+
+
+            <div class="support-card"
+                 onclick="openSupport('Payment Support')">
+
+                <div class="support-icon purple">
+                    <i class="fa-solid fa-credit-card"></i>
+                </div>
+
+                <h3>Payment Support</h3>
+
+                <p>
+                    Get help with payments, transfers
+                    and transaction issues.
+                </p>
+
+                <span class="support-link">
+                    Get Help
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+
+            </div>
+
+
+            <div class="support-card"
+                 onclick="openSupport('Loan Support')">
+
+                <div class="support-icon cyan">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                </div>
+
+                <h3>Loan Support</h3>
+
+                <p>
+                    Learn about loan applications,
+                    EMI payments and loan status.
+                </p>
+
+                <span class="support-link">
+                    Get Help
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+
+            </div>
+
+
+            <div class="support-card"
+                 onclick="openSupport('Card Support')">
+
+                <div class="support-icon orange">
+                    <i class="fa-solid fa-credit-card"></i>
+                </div>
+
+                <h3>Card Support</h3>
+
+                <p>
+                    Help with debit cards, credit cards
+                    and card security.
+                </p>
+
+                <span class="support-link">
+                    Get Help
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+
+            </div>
+
+
+            <div class="support-card"
+                 onclick="openSupport('Security Support')">
+
+                <div class="support-icon green">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <h3>Security</h3>
+
+                <p>
+                    Report suspicious activity and learn
+                    how to protect your account.
+                </p>
+
+                <span class="support-link">
+                    Get Help
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+
+            </div>
+
+
+            <div class="support-card"
+                 onclick="openSupport('Technical Support')">
+
+                <div class="support-icon red">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+
+                <h3>Technical Support</h3>
+
+                <p>
+                    Get assistance with website,
+                    login and application problems.
+                </p>
+
+                <span class="support-link">
+                    Get Help
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         CONTACT
+    ============================== -->
+
+    <section class="contact-section">
+
+
+        <div class="contact-info">
+
+            <span class="contact-label">
+                NEED MORE HELP?
+            </span>
+
+            <h2>
+                Talk to our
+                <span>Support Team</span>
+            </h2>
+
+            <p>
+                Can't find what you're looking for?
+                Send us a message and our support team
+                will help you.
+            </p>
+
+
+            <div class="contact-items">
+
+                <div class="contact-item">
+
+                    <div class="contact-item-icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+
+                    <div>
+                        <strong>Customer Care</strong>
+                        <span>1800 123 4567</span>
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <div class="contact-item-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <div>
+                        <strong>Email Support</strong>
+                        <span>support@apexbank.com</span>
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <div class="contact-item-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
+                    <div>
+                        <strong>Support Hours</strong>
+                        <span>24 × 7 Customer Support</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <div class="support-form-card">
+
+            <h3>Send us a Message</h3>
+
+            <p>
+                Fill in the details below and we'll get back to you.
+            </p>
+
+
+            <form id="supportForm"
+                  onsubmit="submitSupport(event)">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="topic">
+                        Support Topic
+                    </label>
+
+                    <select id="topic" required>
+
+                        <option value="">
+                            Select a topic
+                        </option>
+
+                        <option value="Account Support">
+                            Account Support
+                        </option>
+
+                        <option value="Payment Support">
+                            Payment Support
+                        </option>
+
+                        <option value="Loan Support">
+                            Loan Support
+                        </option>
+
+                        <option value="Card Support">
+                            Card Support
+                        </option>
+
+                        <option value="Security Support">
+                            Security Support
+                        </option>
+
+                        <option value="Technical Support">
+                            Technical Support
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="message">
+                        Message
+                    </label>
+
+                    <textarea
+                        id="message"
+                        placeholder="Describe your issue..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="support-submit">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    Send Message
+
+                </button>
+
+
+                <div
+                    id="supportStatus"
+                    class="support-status">
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         FAQ
+    ============================== -->
+
+    <section class="faq-section">
+
+        <div class="section-heading">
+
+            <h2>
+                Frequently Asked Questions
+            </h2>
+
+            <p>
+                Find quick answers to common questions.
+            </p>
+
+        </div>
+
+
+        <div class="faq-container">
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFAQ(this)">
+
+                    <span>
+                        How can I reset my password?
+                    </span>
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Go to the login page and select
+                        "Forgot Password". Follow the
+                        instructions to securely reset your password.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFAQ(this)">
+
+                    <span>
+                        How long does a bank transfer take?
+                    </span>
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Transfer times depend on the payment
+                        method and banking network. Some digital
+                        payments may be processed instantly.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFAQ(this)">
+
+                    <span>
+                        How can I check my loan status?
+                    </span>
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Open the Loan section from your
+                        ApexBank dashboard to view your
+                        application and loan status.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFAQ(this)">
+
+                    <span>
+                        What should I do if I notice suspicious activity?
+                    </span>
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </button>
+
+                <div class="faq-answer">
+
+                    <p>
+                        Contact ApexBank support immediately
+                        and secure your account. Never share
+                        your password, PIN or OTP with anyone.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         FOOTER
+    ============================== -->
+
+    <footer class="support-footer">
+
+        <div>
+
+            <strong>ApexBank</strong>
+
+            <span>
+                Smart. Secure. Digital Banking.
+            </span>
+
+        </div>
+
+        <p>
+            © 2026 ApexBank. All rights reserved.
+        </p>
+
+    </footer>
+
+</div>
+
+
+<script>
+
+    /* ==============================
+       QUICK SUPPORT
+    ============================== */
+
+    function openSupport(topic) {
+
+        const topicSelect =
+            document.getElementById("topic");
+
+        topicSelect.value = topic;
+
+        document
+            .querySelector(".contact-section")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+    }
+
+
+    /* ==============================
+       SUPPORT FORM
+    ============================== */
+
+    function submitSupport(event) {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("name").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const topic =
+            document.getElementById("topic").value;
+
+        const message =
+            document.getElementById("message").value.trim();
+
+        const status =
+            document.getElementById("supportStatus");
+
+
+        if (!name || !email || !topic || !message) {
+
+            status.className =
+                "support-status error";
+
+            status.innerHTML =
+                '<i class="fa-solid fa-circle-exclamation"></i> ' +
+                'Please complete all fields.';
+
+            return;
+        }
+
+
+        status.className =
+            "support-status success";
+
+        status.innerHTML =
+            '<i class="fa-solid fa-circle-check"></i> ' +
+            'Your support request has been submitted successfully.';
+
+
+        document
+            .getElementById("supportForm")
+            .reset();
+
+    }
+
+
+    /* ==============================
+       FAQ
+    ============================== */
+
+    function toggleFAQ(button) {
+
+        const item =
+            button.parentElement;
+
+        const answer =
+            item.querySelector(".faq-answer");
+
+        const icon =
+            button.querySelector("i");
+
+        const isOpen =
+            item.classList.contains("active");
+
+
+        document
+            .querySelectorAll(".faq-item")
+            .forEach(function(faq) {
+
+                faq.classList.remove("active");
+
+                faq.querySelector(".faq-answer")
+                    .style.maxHeight = null;
+
+                faq.querySelector(".faq-question i")
+                    .className = "fa-solid fa-plus";
+
+            });
+
+
+        if (!isOpen) {
+
+            item.classList.add("active");
+
+            answer.style.maxHeight =
+                answer.scrollHeight + "px";
+
+            icon.className =
+                "fa-solid fa-minus";
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

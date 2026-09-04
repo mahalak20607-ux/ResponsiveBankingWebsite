@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Loans | ApexBank</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/3d.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .dashboard-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 250px;
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+            padding: 25px 15px;
+            background: linear-gradient(180deg, #07152f, #0b1f43);
+            color: white;
+        }
+
+        .sidebar-logo {
+            padding: 5px 15px 30px;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .sidebar-logo span {
+            color: #3b82f6;
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 15px;
+            border-radius: 10px;
+            color: #c8d2e5;
+            text-decoration: none;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255,255,255,.08);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .sidebar-menu a.active {
+            color: white;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            box-shadow: 0 8px 20px rgba(37,99,235,.25);
+        }
+
+        .menu-icon {
+            width: 22px;
+            text-align: center;
+        }
+
+        .logout-link {
+            margin-top: 25px;
+            padding-top: 18px !important;
+            border-top: 1px solid rgba(255,255,255,.1);
+            color: #ffb4b4 !important;
+        }
+
+        /* MAIN */
+
+        .main-content {
+            width: calc(100% - 250px);
+            margin-left: 250px;
+            padding: 28px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 22px;
+            margin-bottom: 25px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(20,35,60,.06);
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .topbar p {
+            margin: 6px 0 0;
+            color: #718096;
+            font-size: 13px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg,#2563eb,#7c3aed);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* HERO */
+
+        .loan-hero {
+            position: relative;
+            overflow: hidden;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            background: linear-gradient(135deg,#0b1f43,#2563eb);
+            color: white;
+            box-shadow: 0 15px 35px rgba(37,99,235,.18);
+        }
+
+        .loan-hero::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            right: -70px;
+            top: -80px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.08);
+        }
+
+        .loan-hero h2 {
+            margin: 0 0 10px;
+            font-size: 27px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .loan-hero p {
+            max-width: 650px;
+            margin: 0;
+            color: #dce8ff;
+            line-height: 1.6;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* LOAN CARDS */
+
+        .section-title {
+            margin: 0 0 15px;
+            font-size: 19px;
+        }
+
+        .loan-types {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .loan-card {
+            padding: 21px;
+            background: white;
+            border-radius: 17px;
+            box-shadow: 0 8px 25px rgba(20,35,60,.06);
+            transition: .3s;
+            border: 2px solid transparent;
+        }
+
+        .loan-card:hover {
+            transform: translateY(-5px);
+            border-color: #2563eb;
+        }
+
+        .loan-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 14px;
+            border-radius: 13px;
+            background: #eff6ff;
+            font-size: 22px;
+        }
+
+        .loan-card h3 {
+            margin: 0 0 7px;
+            font-size: 15px;
+        }
+
+        .loan-card p {
+            margin: 0 0 14px;
+            color: #7b8798;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .loan-rate {
+            color: #2563eb;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* CONTENT GRID */
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 25px;
+        }
+
+        .card {
+            padding: 25px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(25,40,70,.07);
+        }
+
+        .card-header {
+            margin-bottom: 23px;
+        }
+
+        .card-header h2 {
+            margin: 0 0 7px;
+            font-size: 21px;
+        }
+
+        .card-header p {
+            margin: 0;
+            color: #7b8798;
+            font-size: 13px;
+        }
+
+        /* CALCULATOR */
+
+        .range-group {
+            margin-bottom: 22px;
+        }
+
+        .range-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .range-value {
+            color: #2563eb;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: #2563eb;
+            cursor: pointer;
+        }
+
+        .range-minmax {
+            display: flex;
+            justify-content: space-between;
+            color: #98a2b3;
+            font-size: 10px;
+            margin-top: 5px;
+        }
+
+        .loan-select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #dbe2ea;
+            border-radius: 11px;
+            outline: none;
+            margin-bottom: 20px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .calculator-result {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .result-box {
+            padding: 16px 10px;
+            border-radius: 12px;
+            background: #f8fafc;
+            text-align: center;
+        }
+
+        .result-box small {
+            display: block;
+            color: #7b8798;
+            font-size: 10px;
+            margin-bottom: 6px;
+        }
+
+        .result-box strong {
+            color: #172033;
+            font-size: 15px;
+        }
+
+        .result-box.highlight {
+            background: linear-gradient(135deg,#eff6ff,#f3f0ff);
+        }
+
+        .result-box.highlight strong {
+            color: #2563eb;
+        }
+
+        /* ELIGIBILITY */
+
+        .eligibility-list {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+            margin-bottom: 22px;
+        }
+
+        .eligibility-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px;
+            border-radius: 11px;
+            background: #f8fafc;
+        }
+
+        .check-icon {
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #16a34a;
+            font-size: 13px;
+        }
+
+        .eligibility-item strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .eligibility-item small {
+            display: block;
+            margin-top: 3px;
+            color: #7b8798;
+            font-size: 11px;
+        }
+
+        .apply-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 11px;
+            background: linear-gradient(135deg,#2563eb,#4f46e5);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(37,99,235,.25);
+        }
+
+        /* APPLICATION */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(5,15,35,.65);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .application-box {
+            width: min(500px,100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 28px;
+            border-radius: 20px;
+            background: white;
+            animation: modalIn .35s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .close-btn {
+            border: none;
+            background: #f1f5f9;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #344054;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .form-control,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dbe2ea;
+            border-radius: 10px;
+            outline: none;
+            font-size: 13px;
+        }
+
+        .form-control:focus,
+        .form-group select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37,99,235,.08);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 13px;
+        }
+
+        .submit-application {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background: #172033;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* SUCCESS */
+
+        .success-state {
+            display: none;
+            text-align: center;
+            padding: 25px 5px;
+        }
+
+        .success-state.show {
+            display: block;
+        }
+
+        .success-icon {
+            width: 65px;
+            height: 65px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #16a34a;
+            font-size: 30px;
+        }
+
+        .success-state h2 {
+            margin: 0 0 8px;
+        }
+
+        .success-state p {
+            color: #718096;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 1100px) {
+            .loan-types {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main-content {
+                width: calc(100% - 210px);
+                margin-left: 210px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .dashboard-layout {
+                display: block;
+            }
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                min-height: auto;
+            }
+
+            .sidebar-logo {
+                text-align: center;
+            }
+
+            .sidebar-menu {
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .logout-link {
+                margin-top: 5px;
+            }
+
+            .main-content {
+                width: 100%;
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .topbar h1 {
+                font-size: 20px;
+            }
+
+            .user-profile {
+                display: none;
+            }
+
+            .loan-types {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .calculator-result {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .sidebar-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .loan-types {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .loan-hero {
+                padding: 22px;
+            }
+
+            .loan-hero h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            Apex<span>Bank</span>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="dashboard.html">
+                <span class="menu-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="accounts.html">
+                <span class="menu-icon">▣</span>
+                My Accounts
+            </a>
+
+            <a href="transactions.html">
+                <span class="menu-icon">↕</span>
+                Transactions
+            </a>
+
+            <a href="transfer.html">
+                <span class="menu-icon">⇄</span>
+                Transfer Money
+            </a>
+
+            <a href="payments.html">
+                <span class="menu-icon">▤</span>
+                Payments
+            </a>
+
+            <a href="loans.html" class="active">
+                <span class="menu-icon">◈</span>
+                Loans
+            </a>
+
+            <a href="profile.html">
+                <span class="menu-icon">●</span>
+                Profile
+            </a>
+
+            <a href="support.html">
+                <span class="menu-icon">?</span>
+                Support
+            </a>
+
+            <a href="login.html" class="logout-link" id="logoutBtn">
+                <span class="menu-icon">↪</span>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <div class="topbar">
+
+            <div>
+                <h1>Loans</h1>
+                <p>Explore financing options for your goals.</p>
+            </div>
+
+            <div class="user-profile">
+
+                <div>
+                    <strong>Mahalakshmi</strong>
+
+                    <small style="display:block;color:#7b8798;">
+                        Personal Banking
+                    </small>
+                </div>
+
+                <div class="avatar">
+                    M
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- HERO -->
+
+        <section class="loan-hero">
+
+            <h2>
+                Find the Right Loan for You
+            </h2>
+
+            <p>
+                Explore flexible loan options and use our
+                EMI calculator to estimate your monthly payment.
+            </p>
+
+        </section>
+
+
+        <!-- LOAN TYPES -->
+
+        <h2 class="section-title">
+            Loan Products
+        </h2>
+
+        <section class="loan-types">
+
+            <div class="loan-card">
+
+                <div class="loan-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    Home Loan
+                </h3>
+
+                <p>
+                    Financing options for purchasing
+                    or building your dream home.
+                </p>
+
+                <span class="loan-rate">
+                    From 8.50% p.a.
+                </span>
+
+            </div>
+
+
+            <div class="loan-card">
+
+                <div class="loan-icon">
+                    🚗
+                </div>
+
+                <h3>
+                    Auto Loan
+                </h3>
+
+                <p>
+                    Flexible financing for your
+                    next car or vehicle.
+                </p>
+
+                <span class="loan-rate">
+                    From 9.25% p.a.
+                </span>
+
+            </div>
+
+
+            <div class="loan-card">
+
+                <div class="loan-icon">
+                    👤
+                </div>
+
+                <h3>
+                    Personal Loan
+                </h3>
+
+                <p>
+                    Quick financing for personal
+                    expenses and important needs.
+                </p>
+
+                <span class="loan-rate">
+                    From 11.50% p.a.
+                </span>
+
+            </div>
+
+
+            <div class="loan-card">
+
+                <div class="loan-icon">
+                    🎓
+                </div>
+
+                <h3>
+                    Education Loan
+                </h3>
+
+                <p>
+                    Support for higher education
+                    and academic expenses.
+                </p>
+
+                <span class="loan-rate">
+                    From 8.75% p.a.
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- CALCULATOR + ELIGIBILITY -->
+
+        <div class="content-grid">
+
+            <!-- EMI CALCULATOR -->
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <h2>
+                        EMI Calculator
+                    </h2>
+
+                    <p>
+                        Adjust the values to estimate your monthly EMI.
+                    </p>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Loan Type
+                    </label>
+
+                    <select id="loanType" class="loan-select">
+
+                        <option value="11.5">
+                            Personal Loan
+                        </option>
+
+                        <option value="8.5">
+                            Home Loan
+                        </option>
+
+                        <option value="9.25">
+                            Auto Loan
+                        </option>
+
+                        <option value="8.75">
+                            Education Loan
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- AMOUNT -->
+
+                <div class="range-group">
+
+                    <div class="range-label">
+
+                        <span>
+                            Loan Amount
+                        </span>
+
+                        <span
+                            class="range-value"
+                            id="loanAmountValue">
+                            ₹5,00,000
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="range"
+                        id="loanAmount"
+                        min="50000"
+                        max="5000000"
+                        step="50000"
+                        value="500000"
+                    >
+
+                    <div class="range-minmax">
+
+                        <span>₹50K</span>
+
+                        <span>₹50L</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TENURE -->
+
+                <div class="range-group">
+
+                    <div class="range-label">
+
+                        <span>
+                            Loan Tenure
+                        </span>
+
+                        <span
+                            class="range-value"
+                            id="tenureValue">
+                            5 Years
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="range"
+                        id="tenure"
+                        min="1"
+                        max="30"
+                        step="1"
+                        value="5"
+                    >
+
+                    <div class="range-minmax">
+
+                        <span>1 Year</span>
+
+                        <span>30 Years</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESULT -->
+
+                <div class="calculator-result">
+
+                    <div class="result-box highlight">
+
+                        <small>
+                            Monthly EMI
+                        </small>
+
+                        <strong id="emiValue">
+                            ₹10,992
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-box">
+
+                        <small>
+                            Total Interest
+                        </small>
+
+                        <strong id="interestValue">
+                            ₹1,59,520
+                        </strong>
+
+                    </div>
+
+
+                    <div class="result-box">
+
+                        <small>
+                            Total Amount
+                        </small>
+
+                        <strong id="totalValue">
+                            ₹6,59,520
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ELIGIBILITY -->
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <h2>
+                        Eligibility
+                    </h2>
+
+                    <p>
+                        Basic requirements for loan applications.
+                    </p>
+
+                </div>
+
+
+                <div class="eligibility-list">
+
+                    <div class="eligibility-item">
+
+                        <div class="check-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Age Requirement
+                            </strong>
+
+                            <small>
+                                Applicant should meet applicable age criteria.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="eligibility-item">
+
+                        <div class="check-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Stable Income
+                            </strong>
+
+                            <small>
+                                Regular income may be required.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="eligibility-item">
+
+                        <div class="check-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Credit Profile
+                            </strong>
+
+                            <small>
+                                Approval can depend on credit history.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="eligibility-item">
+
+                        <div class="check-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Required Documents
+                            </strong>
+
+                            <small>
+                                Identity and income documents may be requested.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="apply-btn"
+                    id="openApplication">
+                    Apply for a Loan
+                </button>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- APPLICATION MODAL -->
+
+<div class="modal" id="applicationModal">
+
+    <div class="application-box">
+
+        <div class="modal-header">
+
+            <h2>
+                Loan Application
+            </h2>
+
+            <button
+                class="close-btn"
+                id="closeApplication">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="loanForm">
+
+            <div class="form-group">
+
+                <label>
+                    Loan Type
+                </label>
+
+                <select id="applicationLoan">
+
+                    <option>
+                        Personal Loan
+                    </option>
+
+                    <option>
+                        Home Loan
+                    </option>
+
+                    <option>
+                        Auto Loan
+                    </option>
+
+                    <option>
+                        Education Loan
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        class="form-control"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        class="form-control"
+                        placeholder="Enter phone number"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Employment Type
+                </label>
+
+                <select id="employment">
+
+                    <option value="">
+                        Select employment type
+                    </option>
+
+                    <option>
+                        Salaried
+                    </option>
+
+                    <option>
+                        Self Employed
+                    </option>
+
+                    <option>
+                        Student
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Requested Loan Amount
+                </label>
+
+                <input
+                    type="number"
+                    id="requestedAmount"
+                    class="form-control"
+                    placeholder="Enter amount"
+                    min="1000"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-application">
+                Submit Application
+            </button>
+
+        </form>
+
+
+        <!-- SUCCESS -->
+
+        <div class="success-state" id="successState">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Application Submitted
+            </h2>
+
+            <p>
+                Your demo loan application has been
+                submitted successfully.
+            </p>
+
+            <p>
+                Reference ID:
+                <strong id="loanReference">
+                    APX000000
+                </strong>
+            </p>
+
+            <button
+                class="submit-application"
+                onclick="closeModal()">
+                Done
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ELEMENTS */
+
+    const loanAmount =
+        document.getElementById("loanAmount");
+
+    const tenure =
+        document.getElementById("tenure");
+
+    const loanType =
+        document.getElementById("loanType");
+
+    const loanAmountValue =
+        document.getElementById("loanAmountValue");
+
+    const tenureValue =
+        document.getElementById("tenureValue");
+
+    const emiValue =
+        document.getElementById("emiValue");
+
+    const interestValue =
+        document.getElementById("interestValue");
+
+    const totalValue =
+        document.getElementById("totalValue");
+
+
+    /* CURRENCY */
+
+    function money(value) {
+
+        return "₹" + Math.round(value)
+            .toLocaleString("en-IN");
+
+    }
+
+
+    /* EMI CALCULATOR */
+
+    function calculateEMI() {
+
+        const principal =
+            Number(loanAmount.value);
+
+        const years =
+            Number(tenure.value);
+
+        const annualRate =
+            Number(loanType.value);
+
+        const months =
+            years * 12;
+
+        const monthlyRate =
+            annualRate / 12 / 100;
+
+
+        let emi;
+
+
+        if (monthlyRate === 0) {
+
+            emi =
+                principal / months;
+
+        } else {
+
+            emi =
+                principal *
+                monthlyRate *
+                Math.pow(
+                    1 + monthlyRate,
+                    months
+                ) /
+                (
+                    Math.pow(
+                        1 + monthlyRate,
+                        months
+                    ) - 1
+                );
+
+        }
+
+
+        const total =
+            emi * months;
+
+        const interest =
+            total - principal;
+
+
+        loanAmountValue.textContent =
+            money(principal);
+
+        tenureValue.textContent =
+            years + (years === 1 ? " Year" : " Years");
+
+        emiValue.textContent =
+            money(emi);
+
+        interestValue.textContent =
+            money(interest);
+
+        totalValue.textContent =
+            money(total);
+
+    }
+
+
+    loanAmount.addEventListener(
+        "input",
+        calculateEMI
+    );
+
+    tenure.addEventListener(
+        "input",
+        calculateEMI
+    );
+
+    loanType.addEventListener(
+        "change",
+        calculateEMI
+    );
+
+
+    calculateEMI();
+
+
+    /* APPLICATION MODAL */
+
+    const applicationModal =
+        document.getElementById("applicationModal");
+
+    const openApplication =
+        document.getElementById("openApplication");
+
+    const closeApplication =
+        document.getElementById("closeApplication");
+
+
+    openApplication.addEventListener(
+        "click",
+        function () {
+
+            applicationModal.classList.add("show");
+
+        }
+    );
+
+
+    closeApplication.addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    function closeModal() {
+
+        applicationModal.classList.remove("show");
+
+        document.getElementById("loanForm").style.display =
+            "block";
+
+        document.getElementById("successState")
+            .classList.remove("show");
+
+        document.getElementById("loanForm").reset();
+
+    }
+
+
+    /* FORM SUBMIT */
+
+    document
+        .getElementById("loanForm")
+        .addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const reference =
+                    "APX" +
+                    Math.floor(
+                        100000 +
+                        Math.random() * 900000
+                    );
+
+
+                document.getElementById(
+                    "loanReference"
+                ).textContent = reference;
+
+
+                this.style.display = "none";
+
+
+                document.getElementById(
+                    "successState"
+                ).classList.add("show");
+
+            }
+        );
+
+
+    /* CLOSE WHEN CLICKING OUTSIDE */
+
+    applicationModal.addEventListener(
+        "click",
+        function (event) {
+
+            if (event.target === applicationModal) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* LOGOUT */
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                localStorage.removeItem(
+                    "apexBankUser"
+                );
+
+            }
+        );
+
+</script>
+
+</body>
+</html>

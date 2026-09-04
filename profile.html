@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile | ApexBank</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/3d.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .dashboard-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 250px;
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+            padding: 25px 15px;
+            background: linear-gradient(180deg, #07152f, #0b1f43);
+            color: white;
+        }
+
+        .sidebar-logo {
+            padding: 5px 15px 30px;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .sidebar-logo span {
+            color: #3b82f6;
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 15px;
+            border-radius: 10px;
+            color: #c8d2e5;
+            text-decoration: none;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255,255,255,.08);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .sidebar-menu a.active {
+            color: white;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            box-shadow: 0 8px 20px rgba(37,99,235,.25);
+        }
+
+        .menu-icon {
+            width: 22px;
+            text-align: center;
+        }
+
+        .logout-link {
+            margin-top: 25px;
+            padding-top: 18px !important;
+            border-top: 1px solid rgba(255,255,255,.1);
+            color: #ffb4b4 !important;
+        }
+
+        /* MAIN */
+
+        .main-content {
+            width: calc(100% - 250px);
+            margin-left: 250px;
+            padding: 28px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 22px;
+            margin-bottom: 25px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(20,35,60,.06);
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .topbar p {
+            margin: 6px 0 0;
+            color: #718096;
+            font-size: 13px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg,#2563eb,#7c3aed);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* PROFILE HERO */
+
+        .profile-hero {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            background: linear-gradient(135deg,#0b1f43,#2563eb);
+            color: white;
+            box-shadow: 0 15px 35px rgba(37,99,235,.18);
+        }
+
+        .large-avatar {
+            width: 85px;
+            height: 85px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,.15);
+            border: 3px solid rgba(255,255,255,.3);
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .profile-hero h2 {
+            margin: 0 0 6px;
+            font-size: 23px;
+        }
+
+        .profile-hero p {
+            margin: 0 0 8px;
+            color: #dce8ff;
+            font-size: 13px;
+        }
+
+        .verified {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: rgba(255,255,255,.12);
+            color: #d9fbe6;
+            font-size: 10px;
+        }
+
+        /* GRID */
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 25px;
+        }
+
+        .card {
+            padding: 25px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(25,40,70,.07);
+        }
+
+        .card + .card {
+            margin-top: 25px;
+        }
+
+        .card-header {
+            margin-bottom: 22px;
+        }
+
+        .card-header h2 {
+            margin: 0 0 6px;
+            font-size: 20px;
+        }
+
+        .card-header p {
+            margin: 0;
+            color: #7b8798;
+            font-size: 13px;
+        }
+
+        /* PERSONAL DETAILS */
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .detail-item {
+            padding: 15px;
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+
+        .detail-item small {
+            display: block;
+            margin-bottom: 6px;
+            color: #8a94a6;
+            font-size: 11px;
+        }
+
+        .detail-item strong {
+            font-size: 13px;
+            color: #273449;
+        }
+
+        .edit-btn {
+            margin-top: 20px;
+            padding: 11px 18px;
+            border: none;
+            border-radius: 9px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .edit-btn:hover {
+            background: #dbeafe;
+        }
+
+        /* SECURITY */
+
+        .security-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 15px 0;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .security-item:last-child {
+            border-bottom: none;
+        }
+
+        .security-icon {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 11px;
+            background: #eff6ff;
+            font-size: 17px;
+        }
+
+        .security-info {
+            flex: 1;
+        }
+
+        .security-info strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .security-info small {
+            color: #8a94a6;
+            font-size: 11px;
+        }
+
+        .status {
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #dcfce7;
+            color: #15803d;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* TOGGLE */
+
+        .preference-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 16px 0;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .preference-item:last-child {
+            border-bottom: none;
+        }
+
+        .preference-info strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+
+        .preference-info small {
+            color: #8a94a6;
+            font-size: 11px;
+        }
+
+        .switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            cursor: pointer;
+            border-radius: 20px;
+            background: #d1d5db;
+            transition: .3s;
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            left: 3px;
+            top: 3px;
+            border-radius: 50%;
+            background: white;
+            transition: .3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,.15);
+        }
+
+        .switch input:checked + .slider {
+            background: #2563eb;
+        }
+
+        .switch input:checked + .slider::before {
+            transform: translateX(20px);
+        }
+
+        /* ACCOUNT STATUS */
+
+        .account-status {
+            padding: 17px;
+            border-radius: 13px;
+            background: linear-gradient(135deg,#eff6ff,#f3f0ff);
+        }
+
+        .account-status-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .account-status-header strong {
+            font-size: 14px;
+        }
+
+        .active-badge {
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #dcfce7;
+            color: #15803d;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .progress {
+            width: 100%;
+            height: 7px;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #dbeafe;
+        }
+
+        .progress span {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            background: #2563eb;
+        }
+
+        .account-status p {
+            margin: 10px 0 0;
+            color: #667085;
+            font-size: 11px;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(5,15,35,.65);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            width: min(500px,100%);
+            padding: 28px;
+            border-radius: 20px;
+            background: white;
+            animation: modalIn .35s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .close-btn {
+            width: 34px;
+            height: 34px;
+            border: none;
+            border-radius: 50%;
+            background: #f1f5f9;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #344054;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dbe2ea;
+            border-radius: 10px;
+            outline: none;
+            font-size: 13px;
+        }
+
+        .form-control:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37,99,235,.08);
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg,#2563eb,#4f46e5);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1000px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main-content {
+                width: calc(100% - 210px);
+                margin-left: 210px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .dashboard-layout {
+                display: block;
+            }
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                min-height: auto;
+            }
+
+            .sidebar-logo {
+                text-align: center;
+            }
+
+            .sidebar-menu {
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .logout-link {
+                margin-top: 5px;
+            }
+
+            .main-content {
+                width: 100%;
+                margin-left: 0;
+                padding: 15px;
+            }
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .topbar h1 {
+                font-size: 20px;
+            }
+
+            .user-profile {
+                display: none;
+            }
+
+            .profile-hero {
+                padding: 20px;
+            }
+
+            .large-avatar {
+                width: 65px;
+                height: 65px;
+                font-size: 24px;
+            }
+
+            .profile-hero h2 {
+                font-size: 20px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .sidebar-menu {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-hero {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            Apex<span>Bank</span>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="dashboard.html">
+                <span class="menu-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="accounts.html">
+                <span class="menu-icon">▣</span>
+                My Accounts
+            </a>
+
+            <a href="transactions.html">
+                <span class="menu-icon">↕</span>
+                Transactions
+            </a>
+
+            <a href="transfer.html">
+                <span class="menu-icon">⇄</span>
+                Transfer Money
+            </a>
+
+            <a href="payments.html">
+                <span class="menu-icon">▤</span>
+                Payments
+            </a>
+
+            <a href="loans.html">
+                <span class="menu-icon">◈</span>
+                Loans
+            </a>
+
+            <a href="profile.html" class="active">
+                <span class="menu-icon">●</span>
+                Profile
+            </a>
+
+            <a href="support.html">
+                <span class="menu-icon">?</span>
+                Support
+            </a>
+
+            <a href="login.html" class="logout-link" id="logoutBtn">
+                <span class="menu-icon">↪</span>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <div class="topbar">
+
+            <div>
+                <h1>My Profile</h1>
+                <p>Manage your personal information and preferences.</p>
+            </div>
+
+            <div class="user-profile">
+
+                <div>
+                    <strong>Mahalakshmi</strong>
+
+                    <small style="display:block;color:#7b8798;">
+                        Personal Banking
+                    </small>
+                </div>
+
+                <div class="avatar">
+                    M
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROFILE HERO -->
+
+        <section class="profile-hero">
+
+            <div class="large-avatar">
+                M
+            </div>
+
+            <div>
+
+                <h2 id="profileName">
+                    Mahalakshmi
+                </h2>
+
+                <p>
+                    Personal Banking Customer
+                </p>
+
+                <span class="verified">
+                    ✓ Verified Account
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <div class="profile-grid">
+
+            <!-- LEFT -->
+
+            <div>
+
+                <!-- PERSONAL INFORMATION -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Personal Information
+                        </h2>
+
+                        <p>
+                            Your registered account information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="details-grid">
+
+                        <div class="detail-item">
+
+                            <small>
+                                First Name
+                            </small>
+
+                            <strong id="firstName">
+                                Mahalakshmi
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <small>
+                                Last Name
+                            </small>
+
+                            <strong id="lastName">
+                                S
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <small>
+                                Email Address
+                            </small>
+
+                            <strong>
+                                mahalakshmi@example.com
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <small>
+                                Phone Number
+                            </small>
+
+                            <strong>
+                                +91 98765 43210
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <small>
+                                Customer ID
+                            </small>
+
+                            <strong>
+                                APX-2026-4821
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <small>
+                                Account Type
+                            </small>
+
+                            <strong>
+                                Personal Banking
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="edit-btn"
+                        id="editProfile">
+                        ✎ Edit Profile
+                    </button>
+
+                </section>
+
+
+                <!-- NOTIFICATIONS -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Notification Preferences
+                        </h2>
+
+                        <p>
+                            Choose how you receive account updates.
+                        </p>
+
+                    </div>
+
+
+                    <div class="preference-item">
+
+                        <div class="preference-info">
+
+                            <strong>
+                                Transaction Alerts
+                            </strong>
+
+                            <small>
+                                Get notified about account transactions.
+                            </small>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                onchange="showPreferenceMessage()">
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="preference-item">
+
+                        <div class="preference-info">
+
+                            <strong>
+                                Payment Reminders
+                            </strong>
+
+                            <small>
+                                Receive reminders for upcoming bills.
+                            </small>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                onchange="showPreferenceMessage()">
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="preference-item">
+
+                        <div class="preference-info">
+
+                            <strong>
+                                Security Alerts
+                            </strong>
+
+                            <small>
+                                Important security notifications.
+                            </small>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                onchange="showPreferenceMessage()">
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <div>
+
+                <!-- SECURITY -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Security
+                        </h2>
+
+                        <p>
+                            Protect your account with security controls.
+                        </p>
+
+                    </div>
+
+
+                    <div class="security-item">
+
+                        <div class="security-icon">
+                            🔒
+                        </div>
+
+                        <div class="security-info">
+
+                            <strong>
+                                Password
+                            </strong>
+
+                            <small>
+                                Last updated recently
+                            </small>
+
+                        </div>
+
+                        <span class="status">
+                            Secure
+                        </span>
+
+                    </div>
+
+
+                    <div class="security-item">
+
+                        <div class="security-icon">
+                            📱
+                        </div>
+
+                        <div class="security-info">
+
+                            <strong>
+                                Mobile Verification
+                            </strong>
+
+                            <small>
+                                Verified phone number
+                            </small>
+
+                        </div>
+
+                        <span class="status">
+                            Active
+                        </span>
+
+                    </div>
+
+
+                    <div class="security-item">
+
+                        <div class="security-icon">
+                            🛡️
+                        </div>
+
+                        <div class="security-info">
+
+                            <strong>
+                                Two-Step Verification
+                            </strong>
+
+                            <small>
+                                Additional account protection
+                            </small>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                onchange="showSecurityMessage()">
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ACCOUNT STATUS -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Account Status
+                        </h2>
+
+                        <p>
+                            Overview of your banking profile.
+                        </p>
+
+                    </div>
+
+
+                    <div class="account-status">
+
+                        <div class="account-status-header">
+
+                            <strong>
+                                Account Verification
+                            </strong>
+
+                            <span class="active-badge">
+                                ACTIVE
+                            </span>
+
+                        </div>
+
+                        <div class="progress">
+                            <span></span>
+                        </div>
+
+                        <p>
+                            Your profile is fully verified and active.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- QUICK SECURITY -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Security Tips
+                        </h2>
+
+                        <p>
+                            Keep your banking account protected.
+                        </p>
+
+                    </div>
+
+                    <div class="security-item">
+
+                        <div class="security-icon">
+                            ✓
+                        </div>
+
+                        <div class="security-info">
+
+                            <strong>
+                                Never share your password
+                            </strong>
+
+                            <small>
+                                ApexBank will never ask for your password.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="security-item">
+
+                        <div class="security-icon">
+                            ✓
+                        </div>
+
+                        <div class="security-info">
+
+                            <strong>
+                                Use secure devices
+                            </strong>
+
+                            <small>
+                                Access banking only from trusted devices.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- EDIT PROFILE MODAL -->
+
+<div class="modal" id="profileModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+                Edit Profile
+            </h2>
+
+            <button
+                class="close-btn"
+                onclick="closeProfileModal()">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="profileForm">
+
+            <div class="form-group">
+
+                <label>
+                    First Name
+                </label>
+
+                <input
+                    type="text"
+                    id="editFirstName"
+                    class="form-control"
+                    value="Mahalakshmi"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Last Name
+                </label>
+
+                <input
+                    type="text"
+                    id="editLastName"
+                    class="form-control"
+                    value="S"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    class="form-control"
+                    value="mahalakshmi@example.com"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    class="form-control"
+                    value="+91 98765 43210"
+                    required>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-btn">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const profileModal =
+        document.getElementById("profileModal");
+
+
+    /* OPEN PROFILE MODAL */
+
+    document
+        .getElementById("editProfile")
+        .addEventListener("click", function () {
+
+            profileModal.classList.add("show");
+
+        });
+
+
+    /* CLOSE MODAL */
+
+    function closeProfileModal() {
+
+        profileModal.classList.remove("show");
+
+    }
+
+
+    /* SAVE PROFILE */
+
+    document
+        .getElementById("profileForm")
+        .addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            const firstName =
+                document
+                .getElementById("editFirstName")
+                .value
+                .trim();
+
+            const lastName =
+                document
+                .getElementById("editLastName")
+                .value
+                .trim();
+
+
+            if (!firstName || !lastName) {
+
+                alert("Please complete your profile.");
+
+                return;
+
+            }
+
+
+            document
+                .getElementById("firstName")
+                .textContent = firstName;
+
+            document
+                .getElementById("lastName")
+                .textContent = lastName;
+
+            document
+                .getElementById("profileName")
+                .textContent =
+                firstName + " " + lastName;
+
+
+            closeProfileModal();
+
+            alert("Profile updated successfully.");
+
+        });
+
+
+    /* PREFERENCE MESSAGE */
+
+    function showPreferenceMessage() {
+
+        console.log(
+            "Notification preference updated."
+        );
+
+    }
+
+
+    /* SECURITY MESSAGE */
+
+    function showSecurityMessage() {
+
+        console.log(
+            "Security setting updated."
+        );
+
+    }
+
+
+    /* OUTSIDE CLICK */
+
+    profileModal.addEventListener(
+        "click",
+        function (event) {
+
+            if (event.target === profileModal) {
+
+                closeProfileModal();
+
+            }
+
+        }
+    );
+
+
+    /* LOGOUT */
+
+    document
+        .getElementById("logoutBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                localStorage.removeItem(
+                    "apexBankUser"
+                );
+
+            }
+        );
+
+</script>
+
+</body>
+</html>

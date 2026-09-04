@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transfer Money | APEXBANK</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Existing APEXBANK theme -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Transfer page styling -->
+    <link rel="stylesheet" href="css/3d.css">
+    <link rel="stylesheet" href="css/transfer.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="background">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="orb orb-three"></div>
+    </div>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+            <span class="logo-icon">A</span>
+
+            <span>
+                APEX<span>BANK</span>
+            </span>
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="transfer.html" class="active">
+                Transfer
+            </a>
+
+            <a href="loans.html">
+                Loans
+            </a>
+
+            <a href="payments.html">
+                Payments
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="support.html">
+                Support
+            </a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <a href="login.html" class="login-btn">
+                Login
+            </a>
+
+            <a href="dashboard.html" class="primary-btn">
+                Dashboard
+            </a>
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Open menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MOBILE NAV ================= -->
+
+    <div class="mobile-nav" id="mobileNav">
+
+        <a href="index.html">Home</a>
+
+        <a href="transfer.html" class="active">
+            Transfer
+        </a>
+
+        <a href="loans.html">
+            Loans
+        </a>
+
+        <a href="payments.html">
+            Payments
+        </a>
+
+        <a href="profile.html">
+            Profile
+        </a>
+
+        <a href="support.html">
+            Support
+        </a>
+
+    </div>
+
+
+    <!-- ================= PAGE HEADER ================= -->
+
+    <main>
+
+        <section class="page-hero">
+
+            <div class="page-hero-content">
+
+                <div class="badge">
+
+                    <span class="badge-dot"></span>
+
+                    Secure Banking Transfer
+
+                </div>
+
+                <span class="section-label">
+                    MONEY TRANSFER
+                </span>
+
+                <h1>
+                    Send money
+                    <span>securely.</span>
+                </h1>
+
+                <p>
+                    Transfer money quickly and securely to
+                    your saved recipients or another bank account
+                    using APEXBANK.
+                </p>
+
+            </div>
+
+            <div class="floating-balance-card">
+
+                <div class="balance-top">
+
+                    <span>
+                        Available Balance
+                    </span>
+
+                    <span class="balance-icon">
+                        ◈
+                    </span>
+
+                </div>
+
+                <h2>
+                    ₹<span id="availableBalance">
+                        2,45,680.00
+                    </span>
+                </h2>
+
+                <div class="balance-footer">
+
+                    <span>
+                        APEX Savings **** 4821
+                    </span>
+
+                    <span class="secure-status">
+                        ● Secure
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= TRANSFER AREA ================= -->
+
+        <section class="transfer-section">
+
+            <!-- LEFT SIDE -->
+
+            <div class="transfer-main">
+
+                <div class="transfer-card">
+
+                    <div class="card-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                NEW TRANSFER
+                            </span>
+
+                            <h2>
+                                Transfer Money
+                            </h2>
+
+                        </div>
+
+                        <div class="transfer-shield">
+                            ✓
+                        </div>
+
+                    </div>
+
+
+                    <!-- TRANSFER TYPE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Transfer Type
+                        </label>
+
+                        <div class="transfer-types">
+
+                            <button
+                                type="button"
+                                class="transfer-type active"
+                                data-type="bank"
+                            >
+                                <span class="type-icon">
+                                    ⇄
+                                </span>
+
+                                <span>
+                                    <strong>
+                                        Bank Transfer
+                                    </strong>
+
+                                    <small>
+                                        NEFT / IMPS
+                                    </small>
+                                </span>
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="transfer-type"
+                                data-type="upi"
+                            >
+                                <span class="type-icon">
+                                    ◉
+                                </span>
+
+                                <span>
+                                    <strong>
+                                        UPI
+                                    </strong>
+
+                                    <small>
+                                        Instant transfer
+                                    </small>
+                                </span>
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="transfer-type"
+                                data-type="self"
+                            >
+                                <span class="type-icon">
+                                    ↔
+                                </span>
+
+                                <span>
+                                    <strong>
+                                        Self Transfer
+                                    </strong>
+
+                                    <small>
+                                        Your accounts
+                                    </small>
+                                </span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FROM ACCOUNT -->
+
+                    <div class="form-group">
+
+                        <label for="fromAccount">
+                            From Account
+                        </label>
+
+                        <div class="select-wrapper">
+
+                            <select id="fromAccount">
+
+                                <option value="savings">
+                                    APEX Savings •••• 4821 — ₹2,45,680
+                                </option>
+
+                                <option value="current">
+                                    APEX Current •••• 9137 — ₹85,420
+                                </option>
+
+                            </select>
+
+                            <span class="select-arrow">
+                               ⌄
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RECIPIENT -->
+
+                    <div class="form-group">
+
+                        <div class="label-row">
+
+                            <label for="recipient">
+                                Recipient
+                            </label>
+
+                            <button
+                                type="button"
+                                class="add-recipient"
+                                id="addRecipient"
+                            >
+                                + Add New
+                            </button>
+
+                        </div>
+
+
+                        <div class="recipient-box">
+
+                            <div class="recipient-avatar">
+                                AR
+                            </div>
+
+                            <div class="recipient-info">
+
+                                <strong id="recipientName">
+                                    Arjun R
+                                </strong>
+
+                                <small id="recipientAccount">
+                                    HDFC Bank •••• 7291
+                                </small>
+
+                            </div>
+
+                            <span class="verified">
+                                ✓
+                            </span>
+
+                            <span class="select-arrow">
+                               ⌄
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- AMOUNT -->
+
+                    <div class="form-group">
+
+                        <label for="amount">
+                            Amount
+                        </label>
+
+                        <div class="amount-input">
+
+                            <span>
+                                ₹
+                            </span>
+
+                            <input
+                                type="number"
+                                id="amount"
+                                placeholder="0.00"
+                                min="1"
+                                max="245680"
+                            />
+
+                        </div>
+
+                        <div class="amount-hint">
+
+                            <span>
+                                Available:
+                                ₹2,45,680.00
+                            </span>
+
+                            <button
+                                type="button"
+                                id="maxAmount"
+                            >
+                                Use Max
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- NOTE -->
+
+                    <div class="form-group">
+
+                        <label for="transferNote">
+                            Note
+                            <span class="optional">
+                                Optional
+                            </span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="transferNote"
+                            class="text-input"
+                            placeholder="What's this transfer for?"
+                            maxlength="80"
+                        />
+
+                    </div>
+
+
+                    <!-- SCHEDULE -->
+
+                    <div class="schedule-row">
+
+                        <label class="checkbox-container">
+
+                            <input
+                                type="checkbox"
+                                id="scheduleTransfer"
+                            >
+
+                            <span class="custom-checkbox"></span>
+
+                            <span>
+                                Schedule this transfer
+                            </span>
+
+                        </label>
+
+                        <span class="instant-label">
+                            ⚡ Instant
+                        </span>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="button"
+                        class="primary-btn large transfer-submit"
+                        id="transferButton"
+                    >
+
+                        <span>
+                            Continue Transfer
+                        </span>
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <div class="security-note">
+
+                        <span>
+                            🔒
+                        </span>
+
+                        <span>
+                            Your transaction is protected
+                            with bank-grade security.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <aside class="transfer-sidebar">
+
+
+                <!-- SUMMARY -->
+
+                <div class="summary-card">
+
+                    <div class="summary-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                SUMMARY
+                            </span>
+
+                            <h3>
+                                Transfer Preview
+                            </h3>
+
+                        </div>
+
+                        <span class="summary-icon">
+                            ◇
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-recipient">
+
+                        <div class="recipient-avatar large">
+                            AR
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Arjun R
+                            </strong>
+
+                            <span>
+                                HDFC Bank
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Transfer Amount
+                        </span>
+
+                        <strong id="summaryAmount">
+                            ₹0.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Transfer Fee
+                        </span>
+
+                        <strong class="free">
+                            FREE
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Processing
+                        </span>
+
+                        <span>
+                            Instant
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="summaryTotal">
+                            ₹0.00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT TRANSFERS -->
+
+                <div class="recent-card">
+
+                    <div class="recent-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                ACTIVITY
+                            </span>
+
+                            <h3>
+                                Recent Transfers
+                            </h3>
+
+                        </div>
+
+                        <a href="#">
+                            View all
+                        </a>
+
+                    </div>
+
+
+                    <div class="recent-list">
+
+
+                        <div class="recent-item">
+
+                            <div class="recent-avatar">
+                                AK
+                            </div>
+
+                            <div class="recent-info">
+
+                                <strong>
+                                    Ananya K
+                                </strong>
+
+                                <span>
+                                    Today · 10:42 AM
+                                </span>
+
+                            </div>
+
+                            <div class="recent-amount">
+
+                                <strong>
+                                    -₹4,500
+                                </strong>
+
+                                <span class="completed">
+                                    Completed
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="recent-item">
+
+                            <div class="recent-avatar">
+                                RS
+                            </div>
+
+                            <div class="recent-info">
+
+                                <strong>
+                                    Rahul S
+                                </strong>
+
+                                <span>
+                                    Yesterday · 04:18 PM
+                                </span>
+
+                            </div>
+
+                            <div class="recent-amount">
+
+                                <strong>
+                                    -₹2,000
+                                </strong>
+
+                                <span class="completed">
+                                    Completed
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="recent-item">
+
+                            <div class="recent-avatar">
+                                MP
+                            </div>
+
+                            <div class="recent-info">
+
+                                <strong>
+                                    Meera P
+                                </strong>
+
+                                <span>
+                                    Sep 02 · 01:25 PM
+                                </span>
+
+                            </div>
+
+                            <div class="recent-amount">
+
+                                <strong>
+                                    -₹8,750
+                                </strong>
+
+                                <span class="completed">
+                                    Completed
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SECURITY -->
+
+                <div class="security-card">
+
+                    <div class="security-icon">
+                        🛡
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Secure Transfer
+                        </strong>
+
+                        <p>
+                            Every transaction is encrypted
+                            and monitored for suspicious activity.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- ================= BOTTOM INFO ================= -->
+
+        <section class="transfer-info">
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    ⚡
+                </div>
+
+                <div>
+
+                    <strong>
+                        Instant Transfers
+                    </strong>
+
+                    <p>
+                        Send money instantly using
+                        supported transfer methods.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    🔐
+                </div>
+
+                <div>
+
+                    <strong>
+                        Bank-Grade Security
+                    </strong>
+
+                    <p>
+                        Advanced security protects
+                        every transaction.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        No Hidden Fees
+                    </strong>
+
+                    <p>
+                        Transparent pricing with
+                        no surprise charges.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="logo">
+
+                    <span class="logo-icon">
+                        A
+                    </span>
+
+                    <span>
+                        APEX<span>BANK</span>
+                    </span>
+
+                </a>
+
+                <p>
+                    A modern digital banking experience
+                    designed for secure, simple and smarter
+                    financial management.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Banking
+                </h4>
+
+                <a href="transfer.html">
+                    Transfer Money
+                </a>
+
+                <a href="payments.html">
+                    Payments
+                </a>
+
+                <a href="loans.html">
+                    Loans
+                </a>
+
+                <a href="profile.html">
+                    Profile
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Company
+                </h4>
+
+                <a href="#">
+                    About
+                </a>
+
+                <a href="#">
+                    Security
+                </a>
+
+                <a href="#">
+                    Careers
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Support
+                </h4>
+
+                <a href="support.html">
+                    Help Center
+                </a>
+
+                <a href="#">
+                    Privacy
+                </a>
+
+                <a href="#">
+                    Terms
+                </a>
+
+                <a href="#">
+                    FAQs
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 APEXBANK. All rights reserved.
+            </span>
+
+            <span>
+                Secure • Private • Reliable
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= MODAL ================= -->
+
+    <div class="transfer-modal" id="transferModal">
+
+        <div class="modal-backdrop"></div>
+
+        <div class="modal-box">
+
+            <button
+                class="modal-close"
+                id="closeModal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+            <div class="modal-icon">
+                ✓
+            </div>
+
+            <span class="section-label">
+                CONFIRM TRANSFER
+            </span>
+
+            <h2>
+                Review your transfer
+            </h2>
+
+            <p>
+                Please verify the details before
+                continuing.
+            </p>
+
+
+            <div class="confirm-details">
+
+                <div>
+                    <span>
+                        Recipient
+                    </span>
+
+                    <strong>
+                        Arjun R
+                    </strong>
+                </div>
+
+                <div>
+                    <span>
+                        Account
+                    </span>
+
+                    <strong>
+                        HDFC Bank •••• 7291
+                    </strong>
+                </div>
+
+                <div>
+                    <span>
+                        Amount
+                    </span>
+
+                    <strong id="modalAmount">
+                        ₹0.00
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    id="cancelTransfer"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    class="primary-btn"
+                    id="confirmTransfer"
+                >
+                    Confirm Transfer
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/transfer.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+.hero-visual {
+min-height: 560px;
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+perspective: 1200px;
+}
+
+.card-wrapper {
+width: 390px;
+height: 245px;
+position: relative;
+z-index: 5;
+transition: transform .15s ease-out;
+transform-style: preserve-3d;
+}
+
+.bank-card {
+width: 100%;
+height: 100%;
+padding: 27px;
+border-radius: 25px;
+position: relative;
+overflow: hidden;
+
+
+background:
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.18),
+        rgba(255,255,255,.035)
+    );
+
+border: 1px solid rgba(255,255,255,.2);
+
+
+box-shadow:
+    25px 35px 70px rgba(0,0,0,.5),
+    inset 0 1px rgba(255,255,255,.25);
+
+transform-style: preserve-3d;
+
+
+}
+
+.bank-card::before {
+content: "";
+position: absolute;
+width: 300px;
+height: 300px;
+border-radius: 50%;
+background: #645cff;
+filter: blur(80px);
+opacity: .3;
+top: -160px;
+right: -100px;
+}
+
+.bank-card::after {
+content: "";
+position: absolute;
+width: 250px;
+height: 250px;
+border-radius: 50%;
+background: #00d9ff;
+filter: blur(90px);
+opacity: .2;
+bottom: -180px;
+left: -80px;
+}
+
+.card-top,
+.card-bottom,
+.chip,
+.card-number {
+position: relative;
+z-index: 3;
+}
+
+.card-top {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.card-brand {
+font-size: 16px;
+font-weight: 800;
+letter-spacing: 2px;
+}
+
+.contactless {
+font-size: 18px;
+transform: rotate(-90deg);
+color: #d7ddff;
+}
+
+.chip {
+width: 47px;
+height: 35px;
+border-radius: 7px;
+background: linear-gradient(135deg, #f4d98d, #a88945);
+margin-top: 35px;
+padding: 7px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 2px;
+}
+
+.chip div {
+border: 1px solid rgba(0,0,0,.3);
+border-radius: 2px;
+}
+
+.card-number {
+font-size: 18px;
+letter-spacing: 2px;
+margin-top: 20px;
+text-shadow: 0 2px 4px rgba(0,0,0,.3);
+}
+
+.card-bottom {
+display: flex;
+align-items: end;
+justify-content: space-between;
+margin-top: 20px;
+}
+
+.card-bottom small {
+display: block;
+color: #9fa8c0;
+font-size: 7px;
+letter-spacing: 1px;
+margin-bottom: 4px;
+}
+
+.card-bottom strong {
+font-size: 9px;
+letter-spacing: 1px;
+}
+
+.visa {
+font-size: 20px;
+font-weight: 900;
+font-style: italic;
+}
+
+.floating-card {
+position: absolute;
+z-index: 10;
+display: flex;
+align-items: center;
+gap: 11px;
+border: 1px solid var(--border);
+background: rgba(10,15,35,.72);
+box-shadow: 0 20px 50px rgba(0,0,0,.3);
+}
+
+.balance-card {
+right: -5px;
+top: 80px;
+padding: 14px;
+border-radius: 15px;
+animation: floatOne 4s ease-in-out infinite;
+}
+
+.mini-icon {
+width: 32px;
+height: 32px;
+display: grid;
+place-items: center;
+border-radius: 9px;
+background: rgba(100,93,255,.2);
+color: #8c85ff;
+font-weight: 700;
+}
+
+.balance-card small {
+display: block;
+color: var(--muted);
+font-size: 8px;
+}
+
+.balance-card strong {
+font-size: 14px;
+display: block;
+margin-top: 3px;
+}
+
+.balance-arrow {
+color: #5ee5a1;
+}
+
+.security-card {
+left: 0;
+bottom: 95px;
+padding: 13px 17px;
+border-radius: 15px;
+animation: floatTwo 5s ease-in-out infinite;
+}
+
+.shield {
+width: 32px;
+height: 32px;
+border-radius: 50%;
+display: grid;
+place-items: center;
+background: rgba(75,221,159,.12);
+color: #5ee5a1;
+}
+
+.security-card strong,
+.security-card small {
+display: block;
+}
+
+.security-card strong {
+font-size: 11px;
+}
+
+.security-card small {
+color: var(--muted);
+font-size: 8px;
+margin-top: 3px;
+}
+
+.secure-dot {
+width: 7px;
+height: 7px;
+border-radius: 50%;
+background: #55e29e;
+box-shadow: 0 0 12px #55e29e;
+}
+
+.floating-circle {
+position: absolute;
+border-radius: 50%;
+border: 1px solid rgba(255,255,255,.08);
+}
+
+.circle-one {
+width: 500px;
+height: 500px;
+animation: rotateCircle 20s linear infinite;
+}
+
+.circle-two {
+width: 390px;
+height: 390px;
+border-style: dashed;
+animation: rotateCircle 14s linear infinite reverse;
+}
+
+@keyframes floatOne {
+0%,100% {
+transform: translateY(0);
+}
+
+
+50% {
+    transform: translateY(-12px);
+}
+
+
+}
+
+@keyframes floatTwo {
+0%,100% {
+transform: translateY(0);
+}
+
+50% {
+    transform: translateY(10px);
+}
+
+
+}
+
+@keyframes rotateCircle {
+from {
+transform: rotate(0);
+}
+
+to {
+    transform: rotate(360deg);
+}
+
+
+}
